@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TasteBuds", "TasteBuds\TasteBuds.csproj", "{47A97B51-5A73-448F-84C6-29E55A59B0CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47A97B51-5A73-448F-84C6-29E55A59B0CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47A97B51-5A73-448F-84C6-29E55A59B0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47A97B51-5A73-448F-84C6-29E55A59B0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47A97B51-5A73-448F-84C6-29E55A59B0CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC4200E8-6061-46EC-A417-5383DE8F7434}
+	EndGlobalSection
+EndGlobal
