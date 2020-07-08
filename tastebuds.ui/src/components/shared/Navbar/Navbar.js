@@ -11,7 +11,7 @@ class NavBar extends Component {
         <Navbar bg="light" expand="lg">
           <Navbar.Brand>
             <Link className="navbar-brand" to="/">
-              <img src="https://raw.githubusercontent.com/djunaim/TasteBuds/master/tastebuds.ui/src/components/shared/Navbar/assets/tastebuds.png" className="logo-image" alt="tastebuds-logo" />
+              <img src="https://raw.githubusercontent.com/djunaim/TasteBuds/master/tastebuds.ui/src/components/shared/Navbar/assets/taste%20%2B%20buds.png" className="logo-image" alt="tastebuds-logo" />
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
