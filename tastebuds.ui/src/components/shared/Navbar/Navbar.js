@@ -9,7 +9,11 @@ class NavBar extends Component {
     return (
       <div className="Navbar">
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="/">TasteBuds</Navbar.Brand>
+          <Navbar.Brand>
+            <Link className="navbar-brand" to="/">
+              <img src="https://raw.githubusercontent.com/djunaim/TasteBuds/master/tastebuds.ui/src/components/shared/Navbar/assets/tastebuds.png" className="logo-image" alt="tastebuds-logo" />
+            </Link>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
