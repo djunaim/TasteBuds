@@ -12,6 +12,7 @@ import Profile from '../components/pages/Profile/Profile';
 import Restaurants from '../components/pages/Restaurants/Restaurants';
 import RestaurantForm from '../components/pages/RestaurantForm/RestaurantForm';
 import SingleRestaurant from '../components/pages/SingleRestaurant/SingleRestaurant';
+import Navbar from '../components/shared/Navbar/Navbar';
 import locationData from '../helpers/data/locationData';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
@@ -37,6 +38,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
+          <Navbar />
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/profile" exact component={Profile} />
