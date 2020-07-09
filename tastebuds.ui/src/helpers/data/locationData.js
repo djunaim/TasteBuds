@@ -9,7 +9,10 @@ const getLocation = (city) => new Promise((resolve, reject) => {
       'user-key': `${userKey}`,
     },
   })
-    .then((result) => console.log('from get locations', result.data.location_suggestions[0]))
+    .then((result) => {
+      const locations = result.data.location_suggestions[0];
+      resolve(locations);
+    })
     .catch((error) => reject(error, 'errorFromGetLocation'));
 });
 

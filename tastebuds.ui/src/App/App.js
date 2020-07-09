@@ -13,7 +13,6 @@ import Restaurants from '../components/pages/Restaurants/Restaurants';
 import RestaurantForm from '../components/pages/RestaurantForm/RestaurantForm';
 import SingleRestaurant from '../components/pages/SingleRestaurant/SingleRestaurant';
 import Navbar from '../components/shared/Navbar/Navbar';
-import locationData from '../helpers/data/locationData';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === false ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/', state: { from: props.location } }} />);
@@ -26,14 +25,6 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 };
 
 class App extends React.Component {
-  state = {
-    city: 'Nashville',
-  }
-
-  componentDidMount() {
-    locationData.getLocation(this.state.city);
-  }
-
   render() {
     return (
       <div className="App">
