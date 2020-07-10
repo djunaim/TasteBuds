@@ -13,6 +13,7 @@ import Restaurants from '../components/pages/Restaurants/Restaurants';
 import RestaurantForm from '../components/pages/RestaurantForm/RestaurantForm';
 import SingleRestaurant from '../components/pages/SingleRestaurant/SingleRestaurant';
 import Navbar from '../components/shared/Navbar/Navbar';
+import authData from '../helpers/data/authData';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === false ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/', state: { from: props.location } }} />);
