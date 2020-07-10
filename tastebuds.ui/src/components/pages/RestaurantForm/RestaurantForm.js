@@ -3,16 +3,25 @@ import './RestaurantForm.scss';
 import { Link } from 'react-router-dom';
 import locationData from '../../../helpers/data/locationData';
 import cuisinesData from '../../../helpers/data/cuisinesData';
+import searchData from '../../../helpers/data/searchData';
 
 class RestaurantForm extends Component {
   state = {
     cityName: '',
     cityId: 0,
     cuisines: [],
+    restaurants: [],
+    entityId: 0,
+    entityType: 0,
   }
 
   componentDidMount() {
+  }
 
+  getRestaurantsBasedOnLocationAndCuisine = (entityId, entityType, cuisineId) => {
+    searchData.getCuisinesBasedOnLocation(entityId, entityType, cuisineId)
+      .then((restaurants) => this.setState({ restaurants }))
+      .catch((error) => console.error(error, 'errFromGetRestaurantsBasedOnLocationAndCuisine'));
   }
 
   getAllCuisines = (cityId) => {
@@ -25,7 +34,9 @@ class RestaurantForm extends Component {
 
   handleFilter = (e) => {
     e.preventDefault();
+    const { entityId, entityType } = this.state;
     const cuisineId = e.target.value;
+    this.getRestaurantsBasedOnLocationAndCuisine(entityId, entityType, cuisineId);
   }
 
   cityChange = (e) => {
@@ -33,7 +44,7 @@ class RestaurantForm extends Component {
     const city = e.target.value;
     locationData.getLocation(city)
       .then((location) => {
-        this.setState({ cityId: location.city_id });
+        this.setState({ cityId: location.city_id, entityId: location.entity_id, entityType: location.entity_type });
         this.getAllCuisines(location.city_id);
       })
       .catch((error) => console.error(error, 'errFromGetLocation'));
@@ -41,7 +52,7 @@ class RestaurantForm extends Component {
   }
 
   render() {
-    const { cuisines, cityName } = this.state;
+    const { cuisines, cityName, restaurants } = this.state;
 
     return (
       <div className="RestaurantForm">
@@ -73,7 +84,7 @@ class RestaurantForm extends Component {
             </div>
           </div>
         </div>
-        <Link to="/restaurants" className="btn btn-secondary">Restaurants</Link>
+        <Link to="/restaurants" className="btn btn-secondary">Search</Link>
       </div>
     );
   }
