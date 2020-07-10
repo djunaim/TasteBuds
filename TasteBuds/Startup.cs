@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using TasteBuds.DataAccess;
 
 namespace TasteBuds
 {
@@ -26,6 +27,16 @@ namespace TasteBuds
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors(options =>
+                options.AddPolicy("ItsAllGood",
+                    builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin())
+                );
+            services.AddTransient<UserRepository>();
+            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddCors(options =>
+                options.AddPolicy("ItsAllGood",
+                    builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin())
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +50,8 @@ namespace TasteBuds
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("ItsAllGood");
 
             app.UseAuthorization();
 

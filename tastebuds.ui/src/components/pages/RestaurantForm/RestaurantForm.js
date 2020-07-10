@@ -7,6 +7,7 @@ import cuisinesData from '../../../helpers/data/cuisinesData';
 class RestaurantForm extends Component {
   state = {
     cityName: '',
+    cityId: 0,
     cuisines: [],
   }
 
@@ -32,11 +33,11 @@ class RestaurantForm extends Component {
     const city = e.target.value;
     locationData.getLocation(city)
       .then((location) => {
-        this.setState({ cityName: location.city_name, cityId: location.city_id });
+        this.setState({ cityId: location.city_id });
         this.getAllCuisines(location.city_id);
       })
       .catch((error) => console.error(error, 'errFromGetLocation'));
-    this.setState({ cityName: e.target.value });
+    this.setState({ cityName: city });
   }
 
   render() {

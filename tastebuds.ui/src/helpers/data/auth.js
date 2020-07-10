@@ -1,9 +1,10 @@
 import axios from 'axios';
+import apiKeys from '../apiKeys.json';
 
-const baseUrl = 'https://localhost:44392/api';
+const { sqlBaseUrl } = apiKeys;
 
 const loginUser = (email) => {
-  axios.get(`${baseUrl}/api/users/${email}`).then((userResponse) => {
+  axios.get(`${sqlBaseUrl}/api/users/${email}`).then((userResponse) => {
     sessionStorage.setItem('userId', userResponse.id);
   });
 };
