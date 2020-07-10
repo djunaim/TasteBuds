@@ -13,7 +13,7 @@ import Restaurants from '../components/pages/Restaurants/Restaurants';
 import RestaurantForm from '../components/pages/RestaurantForm/RestaurantForm';
 import SingleRestaurant from '../components/pages/SingleRestaurant/SingleRestaurant';
 import Navbar from '../components/shared/Navbar/Navbar';
-import authData from '../helpers/data/authData';
+import SavedRestaurants from '../components/pages/SavedRestaurants/SavedRestaurants';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === false ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/', state: { from: props.location } }} />);
@@ -26,14 +26,37 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 };
 
 class App extends React.Component {
+  state = {
+    authed: false,
+  }
+
+  componentDidMount() {
+    if (sessionStorage.getItem('userId')) {
+      this.setState({ authed: true });
+    } else {
+      this.setState({ authed: false });
+    }
+  }
+
+  componentWillUnmount() {
+    if (sessionStorage.getItem('userId')) {
+      this.setState({ authed: true });
+    } else {
+      this.setState({ authed: false });
+    }
+  }
+
   render() {
+    const { authed } = this.state;
+
     return (
       <div className="App">
         <Router>
-          <Navbar />
+          <Navbar authed={authed} />
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/profile" exact component={Profile} />
+            <PrivateRoute path="/profile" exact component={Profile} authed={authed} />
+            <PrivateRoute path="/profile/savedRestaurants" exact component={SavedRestaurants} authed={authed} />
             <Route path="/findTaste" exact component={RestaurantForm} />
             <Route path="/restaurants" exact component={Restaurants} />
             <Route path="/restaurants/:restaurantId" exact component={SingleRestaurant} />

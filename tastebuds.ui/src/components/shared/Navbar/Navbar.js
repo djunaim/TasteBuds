@@ -2,35 +2,26 @@ import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './Navbar.scss';
 
 import authData from '../../../helpers/data/authData';
 
 class NavBar extends Component {
-  state = {
-    authed: false,
+  static propTypes = {
+    authed: PropTypes.bool,
   }
 
-  componentDidMount() {
-    if (sessionStorage.getItem('userId')) {
-      this.setState({ authed: true });
-    } else {
-      this.setState({ authed: false });
-    }
-  }
-
-  loginClickEvent = (e) => {
-    e.preventDefault();
+  loginClickEvent = () => {
     authData.loginUser('modjun12@gmail.com');
   }
 
-  logoutClickEvent = (e) => {
-    e.preventDefault();
+  logoutClickEvent = () => {
     authData.logoutUser();
   }
 
   render() {
-    const { authed } = this.state;
+    const { authed } = this.props;
 
     return (
       <div className="Navbar">
