@@ -2,10 +2,27 @@ import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './Navbar.scss';
 
+import authData from '../../../helpers/data/authData';
+
 class NavBar extends Component {
+  static propTypes = {
+    authed: PropTypes.bool,
+  }
+
+  loginClickEvent = () => {
+    authData.loginUser('modjun12@gmail.com');
+  }
+
+  logoutClickEvent = () => {
+    authData.logoutUser();
+  }
+
   render() {
+    const { authed } = this.props;
+
     return (
       <div className="Navbar">
         <Navbar bg="light" expand="lg">
@@ -19,7 +36,12 @@ class NavBar extends Component {
             <Nav className="ml-auto">
               <Link className="nav-link" to="/">Home</Link>
               <Link className="nav-link" to="/findTaste">Tasty Adventure</Link>
-              <Link className="nav-link" to="/profile">Profile</Link>
+              {
+                authed ? (<Link className="nav-link" to="/profile">Profile</Link>) : ('')
+              }
+              {
+                !authed ? (<Link to="/" className="btn btn-primary" onClick={this.loginClickEvent}>Login</Link>) : (<Link to="/" className="btn btn-danger" onClick={this.logoutClickEvent}>Log Out</Link>)
+              }
             </Nav>
           </Navbar.Collapse>
         </Navbar>
