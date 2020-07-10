@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import locationData from '../../../helpers/data/locationData';
 import cuisinesData from '../../../helpers/data/cuisinesData';
 import searchData from '../../../helpers/data/searchData';
+import Restaurants from '../Restaurants/Restaurants';
 
 class RestaurantForm extends Component {
   state = {
