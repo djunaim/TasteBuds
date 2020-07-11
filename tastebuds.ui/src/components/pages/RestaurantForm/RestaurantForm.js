@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import './RestaurantForm.scss';
-import { Link } from 'react-router-dom';
 import locationData from '../../../helpers/data/locationData';
 import cuisinesData from '../../../helpers/data/cuisinesData';
 import searchData from '../../../helpers/data/searchData';
-import Restaurants from '../Restaurants/Restaurants';
+import RestaurantCard from '../../shared/RestaurantCard/RestaurantCard';
 
 class RestaurantForm extends Component {
   state = {
     cityName: '',
     cityId: 0,
     cuisines: [],
+    emptyRestaurants: [],
     restaurants: [],
     entityId: 0,
     entityType: 0,
-  }
-
-  componentDidMount() {
   }
 
   getRestaurantsBasedOnLocationAndCuisine = (entityId, entityType, cuisineId) => {
@@ -35,9 +32,18 @@ class RestaurantForm extends Component {
 
   handleFilter = (e) => {
     e.preventDefault();
-    const { entityId, entityType } = this.state;
+    const {
+      entityId,
+      entityType,
+      cityName,
+      emptyRestaurants,
+    } = this.state;
     const cuisineId = e.target.value;
-    this.getRestaurantsBasedOnLocationAndCuisine(entityId, entityType, cuisineId);
+    if (cityName !== '') {
+      this.getRestaurantsBasedOnLocationAndCuisine(entityId, entityType, cuisineId);
+    } else {
+      this.setState({ restaurants: emptyRestaurants });
+    }
   }
 
   cityChange = (e) => {
@@ -50,6 +56,12 @@ class RestaurantForm extends Component {
       })
       .catch((error) => console.error(error, 'errFromGetLocation'));
     this.setState({ cityName: city });
+  }
+
+  clearResultsEvent = (e) => {
+    const { emptyRestaurants } = this.state;
+    e.preventDefault();
+    this.setState({ restaurants: emptyRestaurants, cityName: '', cuisines: [] });
   }
 
   render() {
@@ -84,8 +96,15 @@ class RestaurantForm extends Component {
               </select>
             </div>
           </div>
+        <button className="btn btn-danger" onClick={this.clearResultsEvent}>Clear Results</button>
+        <div className="results">
+          <div className="row">
+            {
+              restaurants.map((r) => <RestaurantCard key={r.restaurant.id} restaurant={r.restaurant} />)
+            }
+          </div>
         </div>
-        <Link to="/restaurants" className="btn btn-secondary">Search</Link>
+        </div>
       </div>
     );
   }
