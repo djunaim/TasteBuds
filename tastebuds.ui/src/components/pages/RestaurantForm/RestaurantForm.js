@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import './RestaurantForm.scss';
-import { Link } from 'react-router-dom';
 import locationData from '../../../helpers/data/locationData';
 import cuisinesData from '../../../helpers/data/cuisinesData';
+import searchData from '../../../helpers/data/searchData';
+import RestaurantCard from '../../shared/RestaurantCard/RestaurantCard';
 
 class RestaurantForm extends Component {
   state = {
     cityName: '',
     cityId: 0,
     cuisines: [],
+    emptyRestaurants: [],
+    restaurants: [],
+    entityId: 0,
+    entityType: 0,
   }
 
-  componentDidMount() {
-
+  getRestaurantsBasedOnLocationAndCuisine = (entityId, entityType, cuisineId) => {
+    searchData.getCuisinesBasedOnLocation(entityId, entityType, cuisineId)
+      .then((restaurants) => this.setState({ restaurants }))
+      .catch((error) => console.error(error, 'errFromGetRestaurantsBasedOnLocationAndCuisine'));
   }
 
   getAllCuisines = (cityId) => {
@@ -25,7 +32,18 @@ class RestaurantForm extends Component {
 
   handleFilter = (e) => {
     e.preventDefault();
+    const {
+      entityId,
+      entityType,
+      cityName,
+      emptyRestaurants,
+    } = this.state;
     const cuisineId = e.target.value;
+    if (cityName !== '') {
+      this.getRestaurantsBasedOnLocationAndCuisine(entityId, entityType, cuisineId);
+    } else {
+      this.setState({ restaurants: emptyRestaurants });
+    }
   }
 
   cityChange = (e) => {
@@ -33,15 +51,21 @@ class RestaurantForm extends Component {
     const city = e.target.value;
     locationData.getLocation(city)
       .then((location) => {
-        this.setState({ cityId: location.city_id });
+        this.setState({ cityId: location.city_id, entityId: location.entity_id, entityType: location.entity_type });
         this.getAllCuisines(location.city_id);
       })
       .catch((error) => console.error(error, 'errFromGetLocation'));
     this.setState({ cityName: city });
   }
 
+  clearResultsEvent = (e) => {
+    const { emptyRestaurants } = this.state;
+    e.preventDefault();
+    this.setState({ restaurants: emptyRestaurants, cityName: '', cuisines: [] });
+  }
+
   render() {
-    const { cuisines, cityName } = this.state;
+    const { cuisines, cityName, restaurants } = this.state;
 
     return (
       <div className="RestaurantForm">
@@ -72,8 +96,15 @@ class RestaurantForm extends Component {
               </select>
             </div>
           </div>
+        <button className="btn btn-danger" onClick={this.clearResultsEvent}>Clear Results</button>
+        <div className="results">
+          <div className="row">
+            {
+              restaurants.map((r) => <RestaurantCard key={r.restaurant.id} restaurant={r.restaurant} />)
+            }
+          </div>
         </div>
-        <Link to="/restaurants" className="btn btn-secondary">Restaurants</Link>
+        </div>
       </div>
     );
   }
