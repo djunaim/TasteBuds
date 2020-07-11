@@ -14,11 +14,31 @@ class RestaurantForm extends Component {
     restaurants: [],
     entityId: 0,
     entityType: 0,
+    cuisineId: 0,
+  }
+
+  componentDidMount() {
+    const entityId = sessionStorage.getItem('entityId');
+    const entityType = sessionStorage.getItem('entityType');
+    const cuisineId = sessionStorage.getItem('cuisineId');
+    // const city = sessionStorage.getItem('cityName');
+    // this.getAllCuisines(entityId);
+    if (entityId, entityType, cuisineId) {
+      this.getRestaurantsBasedOnLocationAndCuisine(entityId, entityType, cuisineId);
+      // this.setState({ cityName: city, entityType });
+    }
   }
 
   getRestaurantsBasedOnLocationAndCuisine = (entityId, entityType, cuisineId) => {
+    // check session storage and if exist, search with those criteria
     searchData.getCuisinesBasedOnLocation(entityId, entityType, cuisineId)
-      .then((restaurants) => this.setState({ restaurants }))
+      .then((restaurants) => {
+      // within then set session storage
+        this.setState({ restaurants });
+        sessionStorage.setItem('entityId', entityId);
+        sessionStorage.setItem('entityType', entityType);
+        sessionStorage.setItem('cuisineId', cuisineId);
+      })
       .catch((error) => console.error(error, 'errFromGetRestaurantsBasedOnLocationAndCuisine'));
   }
 
@@ -37,20 +57,20 @@ class RestaurantForm extends Component {
       entityType,
       cityName,
       emptyRestaurants,
+      cuisineId,
     } = this.state;
-    const cuisineId = e.target.value;
-    if (cityName !== '') {
-      this.getRestaurantsBasedOnLocationAndCuisine(entityId, entityType, cuisineId);
-    } else {
-      this.setState({ restaurants: emptyRestaurants });
-    }
+    // if (sessionStorage.getItem('cuisineId')) {
+    //   this.setState({ cuisineId });
+    // }
+    const cuisineIdSelect = e.target.value;
+    this.getRestaurantsBasedOnLocationAndCuisine(entityId, entityType, cuisineIdSelect);
   }
 
   cityChange = (e) => {
-    // e.preventDefault();
     const city = e.target.value;
     locationData.getLocation(city)
       .then((location) => {
+        // sessionStorage.setItem('cityName', city);
         this.setState({ cityId: location.city_id, entityId: location.entity_id, entityType: location.entity_type });
         this.getAllCuisines(location.city_id);
       })
@@ -62,10 +82,18 @@ class RestaurantForm extends Component {
     const { emptyRestaurants } = this.state;
     e.preventDefault();
     this.setState({ restaurants: emptyRestaurants, cityName: '', cuisines: [] });
+    sessionStorage.setItem('entityId', 0);
+    sessionStorage.setItem('entityType', '');
+    sessionStorage.setItem('cuisineId', 0);
   }
 
   render() {
-    const { cuisines, cityName, restaurants } = this.state;
+    const {
+      cuisines,
+      cityName,
+      restaurants,
+      cuisineId,
+    } = this.state;
 
     return (
       <div className="RestaurantForm">
@@ -89,6 +117,7 @@ class RestaurantForm extends Component {
                   type="select"
                   className="form-control"
                   id="cuisine-name"
+                  // value={cuisineId}
                   onChange={this.handleFilter}
                   >
                   <option>Choose One</option>

@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './RestaurantCard.scss';
 import Card from 'react-bootstrap/Card';
 
@@ -29,6 +30,7 @@ class RestaurantCard extends Component {
           <Card.Footer>
             {location.address}
           </Card.Footer>
+          <Link to={ `/restaurants/${id}` } className="btn btn-primary">View</Link>
         </Card>
       </div>
     );
