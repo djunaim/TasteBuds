@@ -31,10 +31,8 @@ class RestaurantForm extends Component {
   }
 
   getRestaurantsBasedOnLocationAndCuisine = (entityId, entityType, cuisineId) => {
-    // check session storage and if exist, search with those criteria
     searchData.getCuisinesBasedOnLocation(entityId, entityType, cuisineId)
       .then((restaurants) => {
-      // within then set session storage
         this.setState({ restaurants, originalRestaurants: restaurants });
         sessionStorage.setItem('entityId', entityId);
         sessionStorage.setItem('entityType', entityType);
