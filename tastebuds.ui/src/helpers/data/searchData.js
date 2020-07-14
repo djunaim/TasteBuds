@@ -12,7 +12,6 @@ const getCuisinesBasedOnLocation = (entityId, entityType, cuisineId) => new Prom
     .then((result) => {
       const { restaurants } = result.data;
       resolve(restaurants);
-      console.log(restaurants);
     })
     .catch((error) => reject(error, 'errFromGetCuisinesBasedOnLocation'));
 });

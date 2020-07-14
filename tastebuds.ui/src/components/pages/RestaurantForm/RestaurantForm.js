@@ -4,20 +4,22 @@ import locationData from '../../../helpers/data/locationData';
 import cuisinesData from '../../../helpers/data/cuisinesData';
 import searchData from '../../../helpers/data/searchData';
 import RestaurantCard from '../../shared/RestaurantCard/RestaurantCard';
+import SearchBox from '../../shared/SearchBox/SearchBox';
 
 class RestaurantForm extends Component {
   state = {
     cityName: '',
     cityId: 0,
     cuisines: [],
-    emptyRestaurants: [],
     restaurants: [],
+    originalRestaurants: [],
     entityId: 0,
     entityType: 0,
     cuisineId: 0,
   }
 
   componentDidMount() {
+    // get session storage for to get previous results of user
     const entityId = sessionStorage.getItem('entityId');
     const entityType = sessionStorage.getItem('entityType');
     const cuisineId = sessionStorage.getItem('cuisineId');
@@ -30,11 +32,10 @@ class RestaurantForm extends Component {
   }
 
   getRestaurantsBasedOnLocationAndCuisine = (entityId, entityType, cuisineId) => {
-    // check session storage and if exist, search with those criteria
     searchData.getCuisinesBasedOnLocation(entityId, entityType, cuisineId)
       .then((restaurants) => {
-      // within then set session storage
-        this.setState({ restaurants });
+        this.setState({ restaurants, originalRestaurants: restaurants });
+        // set session storage for componentDidMount
         sessionStorage.setItem('entityId', entityId);
         sessionStorage.setItem('entityType', entityType);
         sessionStorage.setItem('cuisineId', cuisineId);
@@ -79,12 +80,25 @@ class RestaurantForm extends Component {
   }
 
   clearResultsEvent = (e) => {
-    const { emptyRestaurants } = this.state;
     e.preventDefault();
-    this.setState({ restaurants: emptyRestaurants, cityName: '', cuisines: [] });
+    this.setState({ restaurants: [], cityName: '', cuisines: [] });
     sessionStorage.setItem('entityId', 0);
     sessionStorage.setItem('entityType', '');
     sessionStorage.setItem('cuisineId', 0);
+  }
+
+  handleSearchEvent = (e) => {
+    const searchField = e.target.value;
+    const { originalRestaurants } = this.state;
+    if (searchField !== '') {
+      this.setState({ restaurants: this.filterProductsByHighlights(originalRestaurants, searchField) });
+    } else {
+      this.setState({ restaurants: originalRestaurants });
+    }
+  }
+
+  filterProductsByHighlights(restaurants, term) {
+    return restaurants.filter((r) => r.restaurant.highlights.some((highlight) => highlight.toLowerCase().includes(term.toLowerCase())));
   }
 
   render() {
@@ -127,6 +141,10 @@ class RestaurantForm extends Component {
           </div>
         <button className="btn btn-danger" onClick={this.clearResultsEvent}>Clear Results</button>
         <div className="results">
+          <SearchBox
+            placeholder='search'
+            handleSearchEvent={this.handleSearchEvent}
+          />
           <div className="row">
             {
               restaurants.map((r) => <RestaurantCard key={r.restaurant.id} restaurant={r.restaurant} />)
