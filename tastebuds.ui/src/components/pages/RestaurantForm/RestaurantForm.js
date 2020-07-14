@@ -19,6 +19,7 @@ class RestaurantForm extends Component {
   }
 
   componentDidMount() {
+    // get session storage for to get previous results of user
     const entityId = sessionStorage.getItem('entityId');
     const entityType = sessionStorage.getItem('entityType');
     const cuisineId = sessionStorage.getItem('cuisineId');
@@ -34,6 +35,7 @@ class RestaurantForm extends Component {
     searchData.getCuisinesBasedOnLocation(entityId, entityType, cuisineId)
       .then((restaurants) => {
         this.setState({ restaurants, originalRestaurants: restaurants });
+        // set session storage for componentDidMount
         sessionStorage.setItem('entityId', entityId);
         sessionStorage.setItem('entityType', entityType);
         sessionStorage.setItem('cuisineId', cuisineId);
