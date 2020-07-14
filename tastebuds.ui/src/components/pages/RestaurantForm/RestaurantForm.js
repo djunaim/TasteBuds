@@ -98,7 +98,7 @@ class RestaurantForm extends Component {
   }
 
   filterProductsByHighlights(restaurants, term) {
-    // return restaurants.filter((r) => r.restaurant.highlights.toLowerCase().includes(term.toLowerCase()));
+    return restaurants.filter((r) => r.restaurant.highlights.some((highlight) => highlight.toLowerCase().includes(term.toLowerCase())));
   }
 
   render() {
