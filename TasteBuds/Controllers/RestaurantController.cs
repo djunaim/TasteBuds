@@ -34,8 +34,25 @@ namespace TasteBuds.Controllers
         [HttpPost("restaurant/addRestaurant")]
         public IActionResult AddRestaurant(Restaurant restaurantToAdd)
         {
-            var restaurant = _RestaurantRepository.AddRestaurant(restaurantToAdd);
-            return Ok(restaurant);
+            var existingRestaurant = _RestaurantRepository.GetSingleRestaurant(restaurantToAdd.RestaurantId);
+            if (existingRestaurant == null)
+            {
+                var restaurant = _RestaurantRepository.AddRestaurant(restaurantToAdd);
+                return Ok(restaurant);
+            }
+            return Ok(existingRestaurant);
+        }
+
+        [HttpGet("restaurant/{restaurantId}")]
+        public IActionResult GetSingleRestaurant(int restaurantId)
+        {
+            var result = _RestaurantRepository.GetSingleRestaurant(restaurantId);
+            if (result == null)
+            {
+                return NotFound("That restaurant does not exist.");
+            }
+
+            return Ok(result);
         }
     }
 }

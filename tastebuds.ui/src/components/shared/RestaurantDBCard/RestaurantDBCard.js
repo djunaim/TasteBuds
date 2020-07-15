@@ -16,7 +16,7 @@ class RestaurantCard extends Component {
       url,
     } = this.props.restaurant;
     return (
-      <div className="RestaurantCard col-md-4" id={restaurantId}>
+      <div className="RestaurantDBCard col-md-4" id={restaurantId}>
         <Card style={{ width: '18rem' }} className="h-100" border="primary">
           {
             thumbNail

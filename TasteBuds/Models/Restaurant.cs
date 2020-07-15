@@ -15,5 +15,6 @@ namespace TasteBuds.Models
         public string PhoneNumber { get; set; }
         public int AverageCostForTwo { get; set; }
         public string ThumbNail { get; set; }
+        public DateTime DateAdded { get; set; }
     }
 }

@@ -25,7 +25,7 @@ class RestaurantForm extends Component {
     const cuisineId = sessionStorage.getItem('cuisineId');
     // const city = sessionStorage.getItem('cityName');
     // this.getAllCuisines(entityId);
-    if (entityId, entityType, cuisineId) {
+    if (entityId && entityType && cuisineId) {
       this.getRestaurantsBasedOnLocationAndCuisine(entityId, entityType, cuisineId);
       // this.setState({ cityName: city, entityType });
     }
@@ -141,10 +141,14 @@ class RestaurantForm extends Component {
           </div>
         <button className="btn btn-danger" onClick={this.clearResultsEvent}>Clear Results</button>
         <div className="results">
-          <SearchBox
-            placeholder='search'
-            handleSearchEvent={this.handleSearchEvent}
-          />
+          {
+            (restaurants.length === 0)
+              ? ('')
+              : (<SearchBox
+                placeholder='search'
+                handleSearchEvent={this.handleSearchEvent}
+              />)
+          }
           <div className="row">
             {
               restaurants.map((r) => <RestaurantCard key={r.restaurant.id} restaurant={r.restaurant} />)

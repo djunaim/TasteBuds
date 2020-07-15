@@ -56,10 +56,10 @@ class SingleRestaurant extends Component {
     const { restaurant, highlights, location } = this.state;
 
     return (
-      <div className="SingleRestaurant">
+      <div className="SingleRestaurant container">
         <h1>{restaurant.name}</h1>
         <Card>
-          <Card.Img variant="top" src={restaurant.featured_image}/>
+          <Card.Img variant="top" src={restaurant.featured_image} roundedcircle />
           <Card.Body>
             <Card.Text>
               Hours: {restaurant.timings}
@@ -75,10 +75,10 @@ class SingleRestaurant extends Component {
               Website: {restaurant.url}
             </Card.Text>
             <Card.Text>
-              Location: {location.address}, {location.city} {location.zipcode}
+              Location: {location.address}
             </Card.Text>
             <Card.Footer>
-              <button className="btn btn-secondary" onClick={this.addRestaurantEvent} >Save to Profile</button>
+              <button className="btn btn-secondary" onClick={this.addRestaurantEvent} >This is my Taste!</button>
             </Card.Footer>
           </Card.Body>
         </Card>
