@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './SavedRestaurants.scss';
 import restaurantData from '../../../helpers/data/restaurantData';
+import RestaurantDBCard from '../../shared/RestaurantDBCard/RestaurantDBCard';
 
 class SavedRestaurants extends Component {
   state = {
@@ -14,9 +15,14 @@ class SavedRestaurants extends Component {
   }
 
   render() {
+    const { restaurants } = this.state;
+
     return (
       <div className="SavedRestaurants">
         <h1>My Restaurants</h1>
+        {
+          restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.id} restaurant={restaurant} />)
+        }
       </div>
     );
   }
