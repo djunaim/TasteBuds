@@ -6,7 +6,6 @@ const { sqlBaseUrl } = apiKeys;
 const loginUser = (email) => {
   axios.get(`${sqlBaseUrl}/user/email/${email}`)
     .then((userResponse) => {
-      console.log('user response', userResponse.data);
       sessionStorage.setItem('userId', userResponse.data.userId);
     });
 };

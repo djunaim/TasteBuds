@@ -32,6 +32,7 @@ namespace TasteBuds
                     builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin())
                 );
             services.AddTransient<UserRepository>();
+            services.AddTransient<RestaurantRepository>();
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddCors(options =>
                 options.AddPolicy("ItsAllGood",

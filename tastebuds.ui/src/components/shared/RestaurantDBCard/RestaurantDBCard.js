@@ -1,24 +1,26 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './RestaurantCard.scss';
+import './RestaurantDBCard.scss';
 import Card from 'react-bootstrap/Card';
 
 class RestaurantCard extends Component {
   render() {
     const {
-      id,
+      restaurantId,
+      address,
+      averageCostForTwo,
+      thumbNail,
+      hours,
       name,
-      average_cost_for_two,
-      thumb,
-      location,
+      url,
     } = this.props.restaurant;
     return (
-      <div className="RestaurantCard col-md-4" id={id}>
+      <div className="RestaurantDBCard col-md-4" id={restaurantId}>
         <Card style={{ width: '18rem' }} className="h-100" border="primary">
           {
-            thumb
-              ? (<Card.Img variant="top" src={thumb} />)
+            thumbNail
+              ? (<Card.Img variant="top" src={thumbNail} />)
               : (<Card.Img variant="top" src="https://images.unsplash.com/photo-1576867757603-05b134ebc379?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />)
           }
           <Card.Title>{name}</Card.Title>
@@ -26,16 +28,16 @@ class RestaurantCard extends Component {
             <Card.Text>
               Average Cost for Two:
               {
-                (average_cost_for_two !== 0)
-                  ? (Number(average_cost_for_two).toLocaleString('en-US', { style: 'currency', currency: 'USD' }))
+                (averageCostForTwo !== 0)
+                  ? (Number(averageCostForTwo).toLocaleString('en-US', { style: 'currency', currency: 'USD' }))
                   : (' Unavailable')
               }
             </Card.Text>
           </Card.Body>
           <Card.Footer>
-            {location.address}
+            {address}
           </Card.Footer>
-          <Link to={ `/restaurants/${id}` } className="btn btn-primary">View</Link>
+          <Link to={ `/restaurants/${restaurantId}` } className="btn btn-primary">View</Link>
         </Card>
       </div>
     );
