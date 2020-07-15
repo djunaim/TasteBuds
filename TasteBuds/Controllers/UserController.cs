@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TasteBuds.DataAccess;
+using TasteBuds.Models;
 
 namespace TasteBuds.Controllers
 {
@@ -27,6 +28,15 @@ namespace TasteBuds.Controllers
             {
                 return NotFound("User doesn't exist");
             }
+            return Ok(result);
+        }
+
+        // Add Restaurant to User //
+        [HttpPost("user/restaurantAdd")] 
+        public IActionResult AddRestaurant(UserRestaurant restaurantToAddToProfile)
+        {
+            //var restaurant = _RestaurantRepository.AddRestaurant(restaurantToAddToProfile.RestaurantId);
+            var result = _UserRepository.AddRestaurantToProfile(restaurantToAddToProfile);
             return Ok(result);
         }
     }

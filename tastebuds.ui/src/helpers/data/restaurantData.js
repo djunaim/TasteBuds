@@ -1,7 +1,7 @@
 import axios from 'axios';
 import apiKeys from '../apiKeys.json';
 
-const { baseUrl, userKey } = apiKeys;
+const { baseUrl, userKey, sqlBaseUrl } = apiKeys;
 
 const getRestaurant = (restaurantId) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/restaurant?res_id=${restaurantId}`, {
@@ -16,4 +16,6 @@ const getRestaurant = (restaurantId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error, 'errorFromGetRestaurant'));
 });
 
-export default { getRestaurant };
+const addRestaurant = (restaurantObj) => axios.post(`${sqlBaseUrl}/restaurant/addRestaurant`, restaurantObj);
+
+export default { getRestaurant, addRestaurant };

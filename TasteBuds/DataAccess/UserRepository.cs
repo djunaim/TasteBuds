@@ -29,5 +29,18 @@ namespace TasteBuds.DataAccess
                 return user;
             }
         }
+
+        public UserRestaurant AddRestaurantToProfile(UserRestaurant restaurantToAddToProfile)
+        {
+            var sql = @"insert into UserRestaurant (UserId, RestaurantId)
+                        output inserted.*
+                        values(@UserId, @RestaurantId)";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.QueryFirstOrDefault<UserRestaurant>(sql, restaurantToAddToProfile);
+                return result;
+            }
+        }
     }
 }

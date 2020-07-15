@@ -12,4 +12,6 @@ const getUser = (email) => new Promise((resolve, reject) => {
     .catch((errFromGetUser) => reject(errFromGetUser));
 });
 
-export default { getUser };
+const addRestaurantToProfile = (restaurantObj) => axios.post(`${sqlBaseUrl}/user/restaurantAdd`, restaurantObj);
+
+export default { getUser, addRestaurantToProfile };
