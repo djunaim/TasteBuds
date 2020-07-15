@@ -24,7 +24,12 @@ class RestaurantCard extends Component {
           <Card.Title>{name}</Card.Title>
           <Card.Body>
             <Card.Text>
-              Average Cost for Two: {Number(average_cost_for_two).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+              Average Cost for Two:
+              {
+                (average_cost_for_two !== 0)
+                  ? (Number(average_cost_for_two).toLocaleString('en-US', { style: 'currency', currency: 'USD' }))
+                  : (' Unavailable')
+              }
             </Card.Text>
           </Card.Body>
           <Card.Footer>
