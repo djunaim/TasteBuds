@@ -29,5 +29,17 @@ namespace TasteBuds.DataAccess
                 return result;
             }
         }
+
+        public IEnumerable<Restaurant> GetAllRestaurants()
+        {
+            var sql = @"select *
+                        from Restaurant";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var restaurants = db.Query<Restaurant>(sql);
+                return restaurants;
+            }
+        }
     }
 }

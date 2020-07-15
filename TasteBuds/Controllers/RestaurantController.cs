@@ -18,6 +18,19 @@ namespace TasteBuds.Controllers
         {
             _RestaurantRepository = restaurantRepository;
         }
+
+        [HttpGet("restaurants")]
+        public IActionResult GetAllRestaurants()
+        {
+            var result = _RestaurantRepository.GetAllRestaurants();
+            if (!result.Any())
+            {
+                return NotFound("No products available");
+            }
+
+            return Ok(result);
+        }
+
         [HttpPost("restaurant/addRestaurant")]
         public IActionResult AddRestaurant(Restaurant restaurantToAdd)
         {
