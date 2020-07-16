@@ -9,6 +9,7 @@ class SingleRestaurant extends Component {
     restaurant: {},
     location: {},
     highlights: [],
+    restaurantInProfile: false,
   }
 
   componentDidMount() {
@@ -16,6 +17,18 @@ class SingleRestaurant extends Component {
     restaurantData.getRestaurant(restaurantId)
       .then((restaurant) => this.setState({ restaurant, location: restaurant.location, highlights: restaurant.highlights }))
       .catch((error) => console.error(error, 'errFromSingleRestaurant'));
+    this.restaurantProfileCheck();
+  }
+
+  restaurantProfileCheck = () => {
+    const { restaurantId } = this.props.match.params;
+    restaurantData.getSingleRestaurant(restaurantId)
+      .then((restaurant) => {
+        if (restaurant.length !== 0) {
+          this.setState({ restaurantInProfile: true });
+        }
+      })
+      .catch((error) => console.error(error, 'errFromRestaurantProfileCheck'));
   }
 
   addRestaurantToProfile = () => {
@@ -52,8 +65,28 @@ class SingleRestaurant extends Component {
       .catch((error) => console.error(error, 'errFromAddRestaurant'));
   }
 
+  deleteUserRestaurant = () => {
+    const { restaurantId } = this.props.match.params;
+    userData.deleteUserRestaurant(restaurantId)
+      .then(() => this.props.history.push('/profile/savedRestaurants'))
+      .catch((error) => console.error(error, 'errFromDeleteUserRestaurant'));
+  }
+
+  deleteRestaurantEvent = (e) => {
+    e.preventDefault();
+    const { restaurantId } = this.props.match.params;
+    restaurantData.deleteRestaurant(restaurantId)
+      .then(() => this.deleteUserRestaurant())
+      .catch((error) => console.error(error, 'errFromDeleteRestauant'));
+  }
+
   render() {
-    const { restaurant, highlights, location } = this.state;
+    const {
+      restaurant,
+      highlights,
+      location,
+      restaurantInProfile,
+    } = this.state;
 
     return (
       <div className="SingleRestaurant container">
@@ -79,6 +112,9 @@ class SingleRestaurant extends Component {
             </Card.Text>
             <Card.Footer>
               <button className="btn btn-secondary" onClick={this.addRestaurantEvent} >This is my Taste!</button>
+              {
+                restaurantInProfile ? (<button className="btn btn-danger" onClick={this.deleteRestaurantEvent} >Remove from My Taste</button>) : ('')
+              }
             </Card.Footer>
           </Card.Body>
         </Card>

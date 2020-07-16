@@ -54,5 +54,12 @@ namespace TasteBuds.Controllers
 
             return Ok(result);
         }
+
+        [HttpDelete("restaurant/remove/{restaurantId}")]
+        public IActionResult RemoveRestaurant(int restaurantId)
+        {
+            var restaurant = _RestaurantRepository.RemoveRestaurant(restaurantId);
+            return Ok(restaurant);
+        }
     }
 }

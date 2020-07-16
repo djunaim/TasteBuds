@@ -27,8 +27,21 @@ const getAllRestaurants = () => new Promise((resolve, reject) => {
 
 const addRestaurant = (restaurantObj) => axios.post(`${sqlBaseUrl}/restaurant/addRestaurant`, restaurantObj);
 
+const deleteRestaurant = (restaurantId) => axios.delete(`${sqlBaseUrl}/restaurant/remove/${restaurantId}`);
+
+const getSingleRestaurant = (restaurantId) => new Promise((resolve, reject) => {
+  axios.get(`${sqlBaseUrl}/restaurant/${restaurantId}`)
+    .then((result) => {
+      const restaurant = result.data;
+      resolve(restaurant);
+    })
+    .catch((error) => reject(error, 'errFromGetSingleResto'));
+});
+
 export default {
   getRestaurant,
   addRestaurant,
   getAllRestaurants,
+  deleteRestaurant,
+  getSingleRestaurant,
 };

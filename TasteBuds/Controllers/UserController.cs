@@ -35,8 +35,14 @@ namespace TasteBuds.Controllers
         [HttpPost("user/restaurantAdd")] 
         public IActionResult AddRestaurant(UserRestaurant restaurantToAddToProfile)
         {
-            //var restaurant = _RestaurantRepository.AddRestaurant(restaurantToAddToProfile.RestaurantId);
             var result = _UserRepository.AddRestaurantToProfile(restaurantToAddToProfile);
+            return Ok(result);
+        }
+
+        [HttpDelete("user/remove/{restaurantId}")]
+        public IActionResult RemoveRestaurantFromProfile(int restaurantId)
+        {
+            var result = _UserRepository.RemoveRestaurantFromProfile(restaurantId);
             return Ok(result);
         }
     }
