@@ -65,18 +65,18 @@ class SingleRestaurant extends Component {
       .catch((error) => console.error(error, 'errFromAddRestaurant'));
   }
 
-  deleteUserRestaurant = () => {
+  deleteUserRestaurantEvent = (e) => {
+    e.preventDefault();
     const { restaurantId } = this.props.match.params;
     userData.deleteUserRestaurant(restaurantId)
-      .then(() => this.props.history.push('/profile/savedRestaurants'))
+      .then(() => this.deleteRestaurant())
       .catch((error) => console.error(error, 'errFromDeleteUserRestaurant'));
   }
 
-  deleteRestaurantEvent = (e) => {
-    e.preventDefault();
+  deleteRestaurant = () => {
     const { restaurantId } = this.props.match.params;
     restaurantData.deleteRestaurant(restaurantId)
-      .then(() => this.deleteUserRestaurant())
+      .then(() => this.props.history.push('/profile/savedRestaurants'))
       .catch((error) => console.error(error, 'errFromDeleteRestauant'));
   }
 
@@ -111,9 +111,8 @@ class SingleRestaurant extends Component {
               Location: {location.address}
             </Card.Text>
             <Card.Footer>
-              <button className="btn btn-secondary" onClick={this.addRestaurantEvent} >This is my Taste!</button>
               {
-                restaurantInProfile ? (<button className="btn btn-danger" onClick={this.deleteRestaurantEvent} >Remove from My Taste</button>) : ('')
+                restaurantInProfile ? (<button className="btn btn-danger" onClick={this.deleteUserRestaurantEvent} >Remove from My Taste</button>) : (<button className="btn btn-secondary" onClick={this.addRestaurantEvent} >This is my Taste!</button>)
               }
             </Card.Footer>
           </Card.Body>

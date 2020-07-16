@@ -54,6 +54,19 @@ namespace TasteBuds.DataAccess
             }
         }
 
+        public UserRestaurant GetSingleUserRestaurant(int restaurantId)
+        {
+            var sql = @"select *
+                        from UserRestaurant
+                        where RestaurantId = @restaurantId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var userRestaurant = db.QueryFirstOrDefault<UserRestaurant>(sql, new { RestaurantId = restaurantId });
+                return userRestaurant;
+            }
+        }
+
         public IEnumerable<UserRestaurant> RemoveRestaurantFromProfile(int restaurantId)
         {
             var sql = @"delete
