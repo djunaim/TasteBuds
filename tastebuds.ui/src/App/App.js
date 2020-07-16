@@ -14,6 +14,7 @@ import RestaurantForm from '../components/pages/RestaurantForm/RestaurantForm';
 import SingleRestaurant from '../components/pages/SingleRestaurant/SingleRestaurant';
 import Navbar from '../components/shared/Navbar/Navbar';
 import SavedRestaurants from '../components/pages/SavedRestaurants/SavedRestaurants';
+import Footer from '../components/shared/Footer/Footer';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === false ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/', state: { from: props.location } }} />);
@@ -61,6 +62,7 @@ class App extends React.Component {
             <Route path="/restaurants" exact component={Restaurants} />
             <Route path="/restaurants/:restaurantId" exact component={SingleRestaurant} />
           </Switch>
+          <Footer authed={authed} />
         </Router>
       </div>
     );
