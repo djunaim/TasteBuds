@@ -55,5 +55,19 @@ namespace TasteBuds.DataAccess
                 return restaurant;
             }
         }
+
+        public IEnumerable<Restaurant> RemoveRestaurant(int restaurantId)
+        {
+            var sql = @"delete
+                        from Restaurant
+                        where RestaurantId = @restaurantId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                db.ExecuteAsync(sql, new { RestaurantId = restaurantId });
+                var restaurants = GetAllRestaurants();
+                return restaurants;
+            }
+        }
     }
 }

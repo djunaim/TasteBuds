@@ -43,7 +43,7 @@ class NavBar extends Component {
                 authed ? (<Link className="nav-link" to="/profile">Profile</Link>) : ('')
               }
               {
-                authed ? (<Link className="nav-link" to="/profile/savedRestaurants">My Tastes</Link>) : ('')
+                authed ? (<Link className="nav-link" to="/profile/savedRestaurants">My Taste</Link>) : ('')
               }
               {
                 !authed ? (<Link to="/" className="btn btn-primary" onClick={this.loginClickEvent}>Login</Link>) : (<Link to="/" className="btn btn-danger" onClick={this.logoutClickEvent}>Log Out</Link>)

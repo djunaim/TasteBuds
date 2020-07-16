@@ -14,4 +14,10 @@ const getUser = (email) => new Promise((resolve, reject) => {
 
 const addRestaurantToProfile = (restaurantObj) => axios.post(`${sqlBaseUrl}/user/restaurantAdd`, restaurantObj);
 
-export default { getUser, addRestaurantToProfile };
+const deleteUserRestaurant = (restaurantId) => axios.delete(`${sqlBaseUrl}/user/remove/${restaurantId}`);
+
+export default {
+  getUser,
+  addRestaurantToProfile,
+  deleteUserRestaurant,
+};
