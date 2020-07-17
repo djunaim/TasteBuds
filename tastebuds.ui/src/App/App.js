@@ -9,7 +9,6 @@ import {
 
 import Home from '../components/pages/Home/Home';
 import Profile from '../components/pages/Profile/Profile';
-import Restaurants from '../components/pages/Restaurants/Restaurants';
 import RestaurantForm from '../components/pages/RestaurantForm/RestaurantForm';
 import SingleRestaurant from '../components/pages/SingleRestaurant/SingleRestaurant';
 import Navbar from '../components/shared/Navbar/Navbar';
@@ -59,7 +58,6 @@ class App extends React.Component {
             <PrivateRoute path="/profile" exact component={Profile} authed={authed} />
             <PrivateRoute path="/profile/savedRestaurants" exact component={SavedRestaurants} authed={authed} />
             <Route path="/findTaste" exact component={RestaurantForm} />
-            <Route path="/restaurants" exact component={Restaurants} />
             <Route path="/restaurants/:restaurantId" exact component={SingleRestaurant} />
           </Switch>
           <Footer authed={authed} />

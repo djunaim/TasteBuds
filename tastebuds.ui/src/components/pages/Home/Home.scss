@@ -1,7 +1,31 @@
 .Home {
-  background-image:url("https://images.unsplash.com/photo-1527224538127-2104bb71c51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80")
+  background-image: url("https://images.unsplash.com/photo-1527224538127-2104bb71c51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .carousel-item {
-  height: 80vh;
+  height: 65vh;
+}
+
+.parallax {
+  background-image:url("https://images.unsplash.com/photo-1527224538127-2104bb71c51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80");
+  height: 35vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.about {
+  background-color: #f8f8f8fb;
+  p {
+    font-size: larger;
+    margin-left: 45px;
+    margin-right: 45px;
+    padding-top: 16px;
+  }
+  :Link {
+    margin-bottom: 16px;
+  }
 }

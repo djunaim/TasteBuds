@@ -56,9 +56,6 @@ class RestaurantForm extends Component {
     const {
       entityId,
       entityType,
-      cityName,
-      emptyRestaurants,
-      cuisineId,
     } = this.state;
     // if (sessionStorage.getItem('cuisineId')) {
     //   this.setState({ cuisineId });
@@ -106,7 +103,6 @@ class RestaurantForm extends Component {
       cuisines,
       cityName,
       restaurants,
-      cuisineId,
     } = this.state;
 
     return (
@@ -144,10 +140,15 @@ class RestaurantForm extends Component {
           {
             (restaurants.length === 0)
               ? ('')
+              : (<h3>Results</h3>)
+          }
+          {
+            (restaurants.length === 0)
+              ? ('')
               : (<SearchBox
-                placeholder='search'
-                handleSearchEvent={this.handleSearchEvent}
-              />)
+                  placeholder='search'
+                  handleSearchEvent={this.handleSearchEvent}
+                />)
           }
           <div className="row">
             {

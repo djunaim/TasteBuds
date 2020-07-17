@@ -11,9 +11,7 @@ class RestaurantCard extends Component {
       address,
       averageCostForTwo,
       thumbNail,
-      hours,
       name,
-      url,
     } = this.props.restaurant;
     return (
       <div className="RestaurantDBCard col-md-4" id={restaurantId}>
@@ -21,7 +19,7 @@ class RestaurantCard extends Component {
           {
             thumbNail
               ? (<Card.Img variant="top" src={thumbNail} />)
-              : (<Card.Img variant="top" src="https://images.unsplash.com/photo-1576867757603-05b134ebc379?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />)
+              : (<Card.Img variant="top" src="https://images.unsplash.com/photo-1580906462791-1ccc3195aa34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />)
           }
           <Card.Title>{name}</Card.Title>
           <Card.Body>
