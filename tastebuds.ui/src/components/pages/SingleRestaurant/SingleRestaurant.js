@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import './SingleRestaurant.scss';
 import Card from 'react-bootstrap/Card';
@@ -92,7 +93,11 @@ class SingleRestaurant extends Component {
       <div className="SingleRestaurant container">
         <h1>{restaurant.name}</h1>
         <Card>
-          <Card.Img variant="top" src={restaurant.featured_image} roundedcircle />
+          {
+            restaurant.featured_image !== ''
+              ? (<Card.Img variant="top" src={restaurant.featured_image} />)
+              : (<Card.Img variant="top" src="https://images.unsplash.com/photo-1580906462791-1ccc3195aa34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />)
+          }
           <Card.Body>
             <Card.Text>
               Hours: {restaurant.timings}

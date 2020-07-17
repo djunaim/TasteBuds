@@ -1,4 +1,8 @@
 .RestaurantDBCard {
   padding-top: 20px;
   padding-bottom: 10px;
+  img.card-img-top {
+    height: 286px;
+    object-fit: cover;
+   }
 }
