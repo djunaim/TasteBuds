@@ -34,9 +34,9 @@ class Home extends Component {
           </Carousel>
         </div>
         <div className="parallax"></div>
-        <div className="about">
+        <div className="about transbox">
           <p>Taste Buds came from an idea that everyone eats, but not everyone knows where to go. It's an app for foodies created by foodies. So, you know you'll be hooked up to some amazing spots if you stick with us. Whether you're alone or with friends, let Taste Buds lead you the way to some tasty adventures. After all, the stomach wants what it wants. If you're ready to start, then let's</p>
-          <Link to="/findTaste" className="btn btn-success">Go On A Tasty Adventure!</Link>
+          <Link to="/findTaste" className="btn btn-outline-secondary">Go On A Tasty Adventure!</Link>
         </div>
         <div className="parallax"></div>
       </div>
