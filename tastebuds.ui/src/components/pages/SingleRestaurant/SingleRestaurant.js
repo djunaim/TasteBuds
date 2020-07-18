@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import './SingleRestaurant.scss';
 import Card from 'react-bootstrap/Card';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import restaurantData from '../../../helpers/data/restaurantData';
 import userData from '../../../helpers/data/userData';
 
@@ -123,7 +125,7 @@ class SingleRestaurant extends Component {
               </Card.Text>
               <Card.Footer>
                 {
-                  restaurantInProfile ? (<button className="btn btn-danger" onClick={this.deleteUserRestaurantEvent} >Remove from My Taste</button>) : (<button className="btn btn-secondary" onClick={this.addRestaurantEvent} >This is my Taste!</button>)
+                  restaurantInProfile ? (<button className="btn remove" onClick={this.deleteUserRestaurantEvent} ><FontAwesomeIcon icon={faTrash} /></button>) : (<button className="btn btn-outline-dark" onClick={this.addRestaurantEvent} >This is my Taste!</button>)
                 }
               </Card.Footer>
             </Card.Body>
