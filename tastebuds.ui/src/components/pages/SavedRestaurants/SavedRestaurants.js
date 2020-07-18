@@ -18,12 +18,14 @@ class SavedRestaurants extends Component {
     const { restaurants } = this.state;
 
     return (
-      <div className="SavedRestaurants container">
-        <h1>My Tastes</h1>
-        <div className="row">
-          {
-            restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.id} restaurant={restaurant} />)
-          }
+      <div className="SavedRestaurants">
+        <div className="container justify-content-center">
+          <h1>My Tastes</h1>
+          <div className="row">
+            {
+              restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.id} restaurant={restaurant} />)
+            }
+          </div>
         </div>
       </div>
     );

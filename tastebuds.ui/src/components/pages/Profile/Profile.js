@@ -39,7 +39,7 @@ class Profile extends Component {
               </Card.Text>
             </Card.Body>
             <Card.Footer className="mb-0">
-              <Link to="/profile/savedRestaurants" className="btn btn-primary">My Tastes</Link>
+              <Link to="/profile/savedRestaurants" className="btn btn-outline-dark">My Tastes</Link>
             </Card.Footer>
           </Card>
         </div>

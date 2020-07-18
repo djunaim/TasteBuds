@@ -15,7 +15,7 @@ class RestaurantCard extends Component {
     } = this.props.restaurant;
     return (
       <div className="RestaurantDBCard col-md-4" id={restaurantId}>
-        <Card style={{ width: '18rem' }} className="h-100" border="primary">
+        <Card className="h-100" border="dark">
           {
             thumbNail
               ? (<Card.Img variant="top" src={thumbNail} />)
@@ -34,8 +34,10 @@ class RestaurantCard extends Component {
           </Card.Body>
           <Card.Footer>
             {address}
+            <div className="viewButton">
+              <Link to={ `/restaurants/${restaurantId}` } className="btn btn-outline-dark">View</Link>
+            </div>
           </Card.Footer>
-          <Link to={ `/restaurants/${restaurantId}` } className="btn btn-primary">View</Link>
         </Card>
       </div>
     );

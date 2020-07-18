@@ -1,10 +1,26 @@
 .RestaurantCard {
-  padding-top: 20px;
-  padding-bottom: 10px;
-
+  // box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.966);
+  margin: 20px 0px 10px 0px;
+  font-weight: bold;
   img.card-img-top {
    height: 286px;
    object-fit: cover;
+  }
+  .viewButton {
+    margin-top: 10px;
+  }
+  div.card-title.h5 {
+    padding-top: 10px;
+  }
+  div.card {
+    opacity: 0.90;
+  }
+}
+
+.RestaurantCard:hover {
+  box-shadow: 5px 10px 20px 1px rgb(228, 228, 228);
+  div.card {
+    opacity: 1.0;
   }
 }
 

@@ -1,6 +1,10 @@
 .RestaurantForm {
-  height: 100vh;
-  scroll-behavior: smooth;
+  background: url("https://images.unsplash.com/photo-1555813456-94a3dd418cd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1226&q=80") no-repeat center center fixed;
+  background-size: cover;
+  h1 {
+    color: white;
+    padding-top: 10px;
+  }
   .results {
     margin-top: 20px;
   }

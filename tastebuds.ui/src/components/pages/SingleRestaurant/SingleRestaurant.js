@@ -90,38 +90,45 @@ class SingleRestaurant extends Component {
     } = this.state;
 
     return (
-      <div className="SingleRestaurant container">
-        <h1>{restaurant.name}</h1>
-        <Card>
-          {
-            restaurant.featured_image !== ''
-              ? (<Card.Img variant="top" src={restaurant.featured_image} />)
-              : (<Card.Img variant="top" src="https://images.unsplash.com/photo-1580906462791-1ccc3195aa34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />)
-          }
-          <Card.Body>
-            <Card.Text>
-              Hours: {restaurant.timings}
-            </Card.Text>
-              Highlights:
-              {
-                highlights.map((highlight) => <Card.Text>{highlight}</Card.Text>)
-              }
-            <Card.Text>
-              Phone Number: {restaurant.phone_numbers}
-            </Card.Text>
-             <Card.Text>
-              Website: {restaurant.url}
-            </Card.Text>
-            <Card.Text>
-              Location: {location.address}
-            </Card.Text>
-            <Card.Footer>
-              {
-                restaurantInProfile ? (<button className="btn btn-danger" onClick={this.deleteUserRestaurantEvent} >Remove from My Taste</button>) : (<button className="btn btn-secondary" onClick={this.addRestaurantEvent} >This is my Taste!</button>)
-              }
-            </Card.Footer>
-          </Card.Body>
-        </Card>
+      <div className="SingleRestaurant">
+        <div className="container">
+          <h1>{restaurant.name}</h1>
+          <Card id={restaurant.id} border="dark">
+            {
+              restaurant.featured_image !== ''
+                ? (<Card.Img variant="top" src={restaurant.featured_image} />)
+                : (<Card.Img variant="top" src="https://images.unsplash.com/photo-1580906462791-1ccc3195aa34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />)
+            }
+            <Card.Body>
+              <Card.Text>
+                <strong>Hours: </strong>
+                {
+                  restaurant.timings === ''
+                    ? (' Unavailable')
+                    : restaurant.timings
+                }
+              </Card.Text>
+                <strong>Highlights: </strong>
+                {
+                  highlights.map((highlight) => <Card.Text>{highlight}</Card.Text>)
+                }
+              <Card.Text>
+                <strong>Phone Number: </strong>{restaurant.phone_numbers}
+              </Card.Text>
+              <Card.Text>
+                <strong>Website: </strong>{restaurant.url}
+              </Card.Text>
+              <Card.Text>
+                <strong>Location: </strong>{location.address}
+              </Card.Text>
+              <Card.Footer>
+                {
+                  restaurantInProfile ? (<button className="btn btn-danger" onClick={this.deleteUserRestaurantEvent} >Remove from My Taste</button>) : (<button className="btn btn-secondary" onClick={this.addRestaurantEvent} >This is my Taste!</button>)
+                }
+              </Card.Footer>
+            </Card.Body>
+          </Card>
+        </div>
       </div>
     );
   }
