@@ -1,9 +1,13 @@
 .RestaurantCard {
+  // box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.966);
   margin: 20px 0px 10px 0px;
   font-weight: bold;
   img.card-img-top {
    height: 286px;
    object-fit: cover;
+  }
+  .viewButton {
+    margin-top: 10px;
   }
 }
 

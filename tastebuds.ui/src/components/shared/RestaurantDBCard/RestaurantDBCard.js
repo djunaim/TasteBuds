@@ -34,8 +34,10 @@ class RestaurantCard extends Component {
           </Card.Body>
           <Card.Footer>
             {address}
+            <div className="viewButton">
+              <Link to={ `/restaurants/${restaurantId}` } className="btn btn-outline-dark">View</Link>
+            </div>
           </Card.Footer>
-          <Link to={ `/restaurants/${restaurantId}` } className="btn btn-primary">View</Link>
         </Card>
       </div>
     );
