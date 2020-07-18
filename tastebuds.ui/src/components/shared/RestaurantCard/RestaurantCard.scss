@@ -9,5 +9,12 @@
   .viewButton {
     margin-top: 10px;
   }
+  div.card-title.h5 {
+    padding-top: 10px;
+  }
+}
+
+.RestaurantCard:hover {
+  box-shadow: 5px 10px 20px 1px rgb(228, 228, 228);
 }
 

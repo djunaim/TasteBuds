@@ -19,7 +19,7 @@ class SavedRestaurants extends Component {
 
     return (
       <div className="SavedRestaurants">
-        <div className="container">
+        <div className="container justify-content-center">
           <h1>My Tastes</h1>
           <div className="row">
             {

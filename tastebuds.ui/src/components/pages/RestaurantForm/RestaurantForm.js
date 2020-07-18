@@ -108,7 +108,7 @@ class RestaurantForm extends Component {
     return (
       <div className="RestaurantForm">
         <h1>Find Your Taste</h1>
-        <div className="container">
+        <div className="container justify-content-center">
           <div className="form-group">
             <label htmlFor="city-query"><strong>City</strong></label>
             <input
