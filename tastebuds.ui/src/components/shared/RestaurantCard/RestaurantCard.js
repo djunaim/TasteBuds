@@ -15,7 +15,7 @@ class RestaurantCard extends Component {
     } = this.props.restaurant;
     return (
       <div className="RestaurantCard col-md-4" id={id}>
-        <Card style={{ width: '18rem' }} className="h-100" border="primary">
+        <Card style={{ width: '18rem' }} className="h-100" border="dark">
           {
             thumb
               ? (<Card.Img variant="top" src={thumb} />)

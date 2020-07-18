@@ -107,7 +107,7 @@ class RestaurantForm extends Component {
 
     return (
       <div className="RestaurantForm">
-        <h1>Restaurant Form</h1>
+        <h1>Find Your Taste</h1>
         <div className="container">
           <div className="form-group">
             <label htmlFor="city-query"><strong>City</strong></label>
@@ -135,7 +135,7 @@ class RestaurantForm extends Component {
               </select>
             </div>
           </div>
-        <button className="btn btn-danger" onClick={this.clearResultsEvent}>Clear Results</button>
+        <button className="btn btn-outline-light" onClick={this.clearResultsEvent}>Clear Results</button>
         <div className="results">
           {
             (restaurants.length === 0)
