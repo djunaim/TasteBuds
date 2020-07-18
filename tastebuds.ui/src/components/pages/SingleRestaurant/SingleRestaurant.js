@@ -93,7 +93,7 @@ class SingleRestaurant extends Component {
       <div className="SingleRestaurant">
         <div className="container">
           <h1>{restaurant.name}</h1>
-          <Card>
+          <Card id={restaurant.id} border="dark">
             {
               restaurant.featured_image !== ''
                 ? (<Card.Img variant="top" src={restaurant.featured_image} />)
@@ -101,20 +101,25 @@ class SingleRestaurant extends Component {
             }
             <Card.Body>
               <Card.Text>
-                Hours: {restaurant.timings}
+                <strong>Hours: </strong>
+                {
+                  restaurant.timings === ''
+                    ? (' Unavailable')
+                    : restaurant.timings
+                }
               </Card.Text>
-                Highlights:
+                <strong>Highlights: </strong>
                 {
                   highlights.map((highlight) => <Card.Text>{highlight}</Card.Text>)
                 }
               <Card.Text>
-                Phone Number: {restaurant.phone_numbers}
+                <strong>Phone Number: </strong>{restaurant.phone_numbers}
               </Card.Text>
               <Card.Text>
-                Website: {restaurant.url}
+                <strong>Website: </strong>{restaurant.url}
               </Card.Text>
               <Card.Text>
-                Location: {location.address}
+                <strong>Location: </strong>{location.address}
               </Card.Text>
               <Card.Footer>
                 {
