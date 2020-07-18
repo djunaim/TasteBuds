@@ -125,7 +125,7 @@ class SingleRestaurant extends Component {
               </Card.Text>
               <Card.Footer>
                 {
-                  restaurantInProfile ? (<button className="btn remove" onClick={this.deleteUserRestaurantEvent} ><FontAwesomeIcon icon={faTrash} /></button>) : (<button className="btn btn-outline-dark" onClick={this.addRestaurantEvent} >This is my Taste!</button>)
+                  restaurantInProfile ? (<button className="btn btn-outline-dark remove" onClick={this.deleteUserRestaurantEvent} ><FontAwesomeIcon icon={faTrash} /></button>) : (<button className="btn btn-outline-dark" onClick={this.addRestaurantEvent} >This is my Taste!</button>)
                 }
               </Card.Footer>
             </Card.Body>
