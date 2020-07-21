@@ -62,5 +62,13 @@ namespace TasteBuds.Controllers
 
             return Ok(result);
         }
+
+        // Add friends //
+        [HttpPost("user/add/userId/{userId]/friend/{friendId}")]
+        public IActionResult AddFriend (int userId, int friendId)
+        {
+            var result = _UserRepository.AddFriend(userId, friendId);
+            return Ok(result);
+        }
     }
 }
