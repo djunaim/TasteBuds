@@ -12,7 +12,6 @@ const getLocation = (city) => new Promise((resolve, reject) => {
     .then((result) => {
       const locations = result.data.location_suggestions[0];
       resolve(locations);
-      console.log('location', locations);
     })
     .catch((error) => reject(error, 'errorFromGetLocation'));
 });
