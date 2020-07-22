@@ -52,10 +52,13 @@ class Profile extends Component {
             </Card.Footer>
           </Card>
         </div>
-        <div className="friends">
-          {
-            friends.map((friend) => <FriendCard key={friend.friendShipId} friend={friend} />)
-          }
+        <div className="friends container">
+          <h4>Friends</h4>
+          <div className="row">
+            {
+              friends.map((friend) => <FriendCard key={friend.friendShipId} friend={friend} />)
+            }
+          </div>
         </div>
       </div>
     );
