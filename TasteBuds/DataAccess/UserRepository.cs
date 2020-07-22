@@ -80,5 +80,51 @@ namespace TasteBuds.DataAccess
                 return userRestaurants;
             }
         }
+
+        public User GetSingleUserById(int userId)
+        {
+            var sql = @"select *
+                        from [User]
+                        where UserId = @userId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var user = db.QueryFirstOrDefault<User>(sql, new { UserId = userId });
+                return user;
+            }
+        }
+
+        public Friendship AddFriend(int userId, int friendId)
+        {
+            var sql = @"insert into Friendship (UserId1, UserId2)
+                        output inserted.*
+                        values (@UserId1, @UserId2)";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    UserId1 = userId,
+                    UserId2 = friendId,
+                };
+
+                var result = db.QueryFirstOrDefault<Friendship>(sql, parameters);
+                return result;
+            }
+        }
+
+        public IEnumerable<UserName> GetFriends()
+        {
+            var sql = @"select FirstName, LastName
+                        from Friendship
+	                        join [User]
+	                        on Friendship.UserId2 = [User].UserId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.Query<UserName>(sql);
+                return result;
+            }
+        }
     }
 }
