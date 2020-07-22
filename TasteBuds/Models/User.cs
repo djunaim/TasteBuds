@@ -11,17 +11,7 @@ namespace TasteBuds.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public List<UserIdOnly> Friends { get; set; }
-    }
-
-    public class UserIdOnly
-    {
-        public int UserId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public List<UserIdOnly> Friends { get; set; }
-
+        public List<int> Friends { get; set; }
     }
 
 }

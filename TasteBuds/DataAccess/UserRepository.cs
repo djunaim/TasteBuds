@@ -81,7 +81,7 @@ namespace TasteBuds.DataAccess
             }
         }
 
-        public UserIdOnly GetSingleUserById(int userId)
+        public User GetSingleUserById(int userId)
         {
             var sql = @"select *
                         from [User]
@@ -89,20 +89,28 @@ namespace TasteBuds.DataAccess
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var user = db.QueryFirstOrDefault<UserIdOnly>(sql, new { UserId = userId });
+                var user = db.QueryFirstOrDefault<User>(sql, new { UserId = userId });
                 return user;
             }
         }
 
-        public User AddFriend(int userId, int friendId)
+        public Friendship AddFriend(int userId, int friendId)
         {
-            var friendList = new List<UserIdOnly>();
-            var user = GetSingleUserById(userId);
-            var friend = GetSingleUserById(friendId);
-            friendList.Add(friend);
-            user.Friends = friendList;
-            var userWithFriends = GetSingleUser(user.Email);
-            return userWithFriends;
+            var sql = @"insert into Friendship (UserId1, UserId2)
+                        output inserted.*
+                        values (@UserId1, @UserId2)";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    UserId1 = userId,
+                    UserId2 = friendId,
+                };
+
+                var result = db.QueryFirstOrDefault<Friendship>(sql, parameters);
+                return result;
+            }
         }
     }
 }
