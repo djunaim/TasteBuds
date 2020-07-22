@@ -65,12 +65,24 @@ namespace TasteBuds.Controllers
 
         // Add friends //
         [HttpPost("user/friendship/user/{userId}/friend/{friendId}")]
-        public IActionResult AddFriend (int userId, int friendId)
+        public IActionResult AddFriend(int userId, int friendId)
         {
             var result = _UserRepository.AddFriend(userId, friendId);
             if (result == null)
             {
                 return NotFound("UserId or FriendId does not exist");
+            }
+            return Ok(result);
+        }
+
+        // Get Friends //
+        [HttpGet("user/friends")]
+        public IActionResult GetFriends()
+        {
+            var result = _UserRepository.GetFriends();
+            if (result == null)
+            {
+                return NotFound("No friends found");
             }
             return Ok(result);
         }

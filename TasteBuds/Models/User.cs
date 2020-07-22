@@ -14,4 +14,9 @@ namespace TasteBuds.Models
         public List<int> Friends { get; set; }
     }
 
+    public class UserName
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
 }
