@@ -20,7 +20,6 @@ class SingleRestaurant extends Component {
       .then((restaurant) => {
         this.setState({ restaurant, location: restaurant.location, highlights: restaurant.highlights });
         this.restaurantProfileCheck();
-        this.getSingleRestaurantWithUsers();
       })
       .catch((error) => console.error(error, 'errFromSingleRestaurant'));
   }
@@ -32,15 +31,19 @@ class SingleRestaurant extends Component {
         if (restaurant.length !== 0) {
           this.setState({ restaurantInProfile: true });
         }
+        this.getSingleRestaurantWithUsers();
       })
       .catch((error) => console.error(error, 'errFromRestaurantProfileCheck'));
   }
 
   getSingleRestaurantWithUsers = () => {
     const { restaurantId } = this.props.match.params;
-    restaurantData.getSingleRestaurantWithUsers(restaurantId)
-      .then((restaurantWithUsers) => this.setState({ buds: restaurantWithUsers.friends }))
-      .catch((error) => console.error(error, 'errFromGetSingleRestaurantWithUsers'));
+    const { restaurantInProfile } = this.state;
+    if (restaurantInProfile) {
+      restaurantData.getSingleRestaurantWithUsers(restaurantId)
+        .then((restaurantWithUsers) => this.setState({ buds: restaurantWithUsers.friends }))
+        .catch((error) => console.error(error, 'errFromGetSingleRestaurantWithUsers'));
+    }
   }
 
   addRestaurantToProfile = () => {
