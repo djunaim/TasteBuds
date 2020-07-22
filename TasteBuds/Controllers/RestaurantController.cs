@@ -55,6 +55,18 @@ namespace TasteBuds.Controllers
             return Ok(result);
         }
 
+        // Get Single Restaurant With Users //
+        [HttpGet("restaurant/{restaurantId}/friends")]
+        public IActionResult GetSingleRestaurantWithUsers(int restaurantId)
+        {
+            var result = _RestaurantRepository.GetSingleRestaurantWithUsers(restaurantId);
+            if (result == null)
+            {
+                return NotFound("That restaurant does not exist");
+            }
+            return Ok(result);
+        }
+
         [HttpDelete("restaurant/remove/{restaurantId}")]
         public IActionResult RemoveRestaurant(int restaurantId)
         {

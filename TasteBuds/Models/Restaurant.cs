@@ -17,4 +17,18 @@ namespace TasteBuds.Models
         public string ThumbNail { get; set; }
         public DateTime DateAdded { get; set; }
     }
+
+    public class RestaurantWithUsers
+    {
+        public int RestaurantId { get; set; }
+        public string Address { get; set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
+        public string Hours { get; set; }
+        public string PhoneNumber { get; set; }
+        public int AverageCostForTwo { get; set; }
+        public string ThumbNail { get; set; }
+        public DateTime DateAdded { get; set; }
+        public List<User> Friends { get; set; }
+    }
 }

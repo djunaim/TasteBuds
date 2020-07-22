@@ -56,6 +56,41 @@ namespace TasteBuds.DataAccess
             }
         }
 
+        public RestaurantWithUsers GetSingleRestaurantWithUsers(int restaurantId)
+        {
+            var restaurantSql = @"select *
+                                from Restaurant
+                                where RestaurantId = @restaurantId";
+
+            var userRes = @"select *
+                            from UserRestaurant
+                            where RestaurantId = @restaurantId";
+
+            var usersSql = @"select *
+                            from [User]";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var restaurant = db.QueryFirstOrDefault<RestaurantWithUsers>(restaurantSql, new { RestaurantId = restaurantId });
+                var userRestaurants = db.Query<UserRestaurant>(userRes, new { RestaurantId = restaurantId });
+                var users = db.Query<User>(usersSql);
+                var friendsList = new List<User>();
+
+                foreach (var userRestaurant in userRestaurants)
+                {
+                    foreach (var user in users)
+                    {
+                        if (userRestaurant.UserId == user.UserId)
+                        {
+                            friendsList.Add(user);
+                        }
+                    }
+                }
+                restaurant.Friends = friendsList;
+                return restaurant;
+            }
+        }
+
         public IEnumerable<Restaurant> RemoveRestaurant(int restaurantId)
         {
             var sql = @"delete
