@@ -11,14 +11,18 @@ class SingleRestaurant extends Component {
     location: {},
     highlights: [],
     restaurantInProfile: false,
+    buds: [],
   }
 
   componentDidMount() {
     const { restaurantId } = this.props.match.params;
     restaurantData.getRestaurant(restaurantId)
-      .then((restaurant) => this.setState({ restaurant, location: restaurant.location, highlights: restaurant.highlights }))
+      .then((restaurant) => {
+        this.setState({ restaurant, location: restaurant.location, highlights: restaurant.highlights });
+        this.restaurantProfileCheck();
+        this.getSingleRestaurantWithUsers();
+      })
       .catch((error) => console.error(error, 'errFromSingleRestaurant'));
-    this.restaurantProfileCheck();
   }
 
   restaurantProfileCheck = () => {
@@ -30,6 +34,13 @@ class SingleRestaurant extends Component {
         }
       })
       .catch((error) => console.error(error, 'errFromRestaurantProfileCheck'));
+  }
+
+  getSingleRestaurantWithUsers = () => {
+    const { restaurantId } = this.props.match.params;
+    restaurantData.getSingleRestaurantWithUsers(restaurantId)
+      .then((restaurantWithUsers) => this.setState({ buds: restaurantWithUsers.friends }))
+      .catch((error) => console.error(error, 'errFromGetSingleRestaurantWithUsers'));
   }
 
   addRestaurantToProfile = () => {
@@ -87,6 +98,7 @@ class SingleRestaurant extends Component {
       highlights,
       location,
       restaurantInProfile,
+      buds,
     } = this.state;
 
     return (
@@ -121,6 +133,17 @@ class SingleRestaurant extends Component {
               <Card.Text>
                 <strong>Location: </strong>{location.address}
               </Card.Text>
+              <Card.Text>
+                <strong>Buds With Same Taste:</strong>
+                {
+                  buds.length !== 0
+                    ? (
+                      buds.map((buddy) => <Card.Text>{buddy.firstName} {buddy.lastName}</Card.Text>)
+                    )
+                    : (' No buds with same taste yet')
+                }
+              </Card.Text>
+
               <Card.Footer>
                 {
                   restaurantInProfile ? (<button className="btn btn-outline-dark remove" onClick={this.deleteUserRestaurantEvent} >Remove From My Taste</button>) : (<button className="btn btn-outline-dark" onClick={this.addRestaurantEvent} >This is my Taste!</button>)
