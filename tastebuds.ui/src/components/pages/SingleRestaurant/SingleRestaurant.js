@@ -133,7 +133,6 @@ class SingleRestaurant extends Component {
               <Card.Text>
                 <strong>Location: </strong>{location.address}
               </Card.Text>
-              <Card.Text>
                 <strong>Buds With Same Taste:</strong>
                 {
                   buds.length !== 0
@@ -142,8 +141,6 @@ class SingleRestaurant extends Component {
                     )
                     : (' No buds with same taste yet')
                 }
-              </Card.Text>
-
               <Card.Footer>
                 {
                   restaurantInProfile ? (<button className="btn btn-outline-dark remove" onClick={this.deleteUserRestaurantEvent} >Remove From My Taste</button>) : (<button className="btn btn-outline-dark" onClick={this.addRestaurantEvent} >This is my Taste!</button>)
