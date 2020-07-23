@@ -58,7 +58,8 @@ namespace TasteBuds.DataAccess
         public UserWithRestaurantList GetUserWithRestaurants(int userId)
         {
             var restaurantSql = @"select *
-                                from Restaurant";
+                                from Restaurant
+                                order by DateAdded desc";
 
             var userRes = @"select *
                             from UserRestaurant
