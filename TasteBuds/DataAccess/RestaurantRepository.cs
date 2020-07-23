@@ -67,7 +67,9 @@ namespace TasteBuds.DataAccess
                             where RestaurantId = @restaurantId";
 
             var usersSql = @"select *
-                            from [User]";
+                            from [User]
+	                            join Friendship
+	                            on [User].UserId = Friendship.UserId2";
 
             using (var db = new SqlConnection(ConnectionString))
             {
