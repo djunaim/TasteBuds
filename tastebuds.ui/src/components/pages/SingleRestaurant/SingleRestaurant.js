@@ -20,30 +20,28 @@ class SingleRestaurant extends Component {
       .then((restaurant) => {
         this.setState({ restaurant, location: restaurant.location, highlights: restaurant.highlights });
         this.restaurantProfileCheck();
+        this.getSingleRestaurantWithUsers();
       })
       .catch((error) => console.error(error, 'errFromSingleRestaurant'));
   }
 
   restaurantProfileCheck = () => {
     const { restaurantId } = this.props.match.params;
-    restaurantData.getSingleRestaurant(restaurantId)
-      .then((restaurant) => {
-        if (restaurant.length !== 0) {
+    const userId = sessionStorage.getItem('userId');
+    userData.getSingleUserRestaurantByUserId(userId, restaurantId)
+      .then((response) => {
+        if (response.length !== 0) {
           this.setState({ restaurantInProfile: true });
         }
-        this.getSingleRestaurantWithUsers();
       })
       .catch((error) => console.error(error, 'errFromRestaurantProfileCheck'));
   }
 
   getSingleRestaurantWithUsers = () => {
     const { restaurantId } = this.props.match.params;
-    const { restaurantInProfile } = this.state;
-    if (restaurantInProfile) {
-      restaurantData.getSingleRestaurantWithUsers(restaurantId)
-        .then((restaurantWithUsers) => this.setState({ buds: restaurantWithUsers.friends }))
-        .catch((error) => console.error(error, 'errFromGetSingleRestaurantWithUsers'));
-    }
+    restaurantData.getSingleRestaurantWithUsers(restaurantId)
+      .then((restaurantWithUsers) => this.setState({ buds: restaurantWithUsers.friends }))
+      .catch((error) => console.error(error, 'errFromGetSingleRestaurantWithUsers'));
   }
 
   addRestaurantToProfile = () => {
@@ -55,7 +53,7 @@ class SingleRestaurant extends Component {
       // eslint-disable-next-line radix
       userId: parseInt(userId),
     };
-    userData.addRestaurantToProfile(newUserRestaurant)
+    userData.addRestaurantToProfile(userId, newUserRestaurant)
       .then(() => this.props.history.push('/profile/savedRestaurants'))
       .catch((error) => console.error(error, 'errFromAddRestaurantToProfile'));
   }
@@ -83,7 +81,8 @@ class SingleRestaurant extends Component {
   deleteUserRestaurantEvent = (e) => {
     e.preventDefault();
     const { restaurantId } = this.props.match.params;
-    userData.deleteUserRestaurant(restaurantId)
+    const userId = sessionStorage.getItem('userId');
+    userData.deleteUserRestaurant(userId, restaurantId)
       .then(() => this.deleteRestaurant())
       .catch((error) => console.error(error, 'errFromDeleteUserRestaurant'));
   }
@@ -116,27 +115,27 @@ class SingleRestaurant extends Component {
             }
             <Card.Body>
               <Card.Text>
-                <strong>Hours: </strong>
+                <h5>Hours:</h5>
                 {
                   restaurant.timings === ''
                     ? (' Unavailable')
                     : restaurant.timings
                 }
               </Card.Text>
-                <strong>Highlights: </strong>
+                <h5>Highlights:</h5>
                 {
                   highlights.map((highlight) => <Card.Text>{highlight}</Card.Text>)
                 }
               <Card.Text>
-                <strong>Phone Number: </strong>{restaurant.phone_numbers}
+                <h5>Phone Number:</h5>{restaurant.phone_numbers}
               </Card.Text>
               <Card.Text>
-                <strong>Website: </strong>{restaurant.url}
+                <h5>Website:</h5>{restaurant.url}
               </Card.Text>
               <Card.Text>
-                <strong>Location: </strong>{location.address}
+                <h5>Location:</h5>{location.address}
               </Card.Text>
-                <strong>Buds With Same Taste:</strong>
+                <h5>Buds With Same Taste:</h5>
                 {
                   buds.length !== 0
                     ? (

@@ -42,41 +42,79 @@ namespace TasteBuds.DataAccess
                 return result;
             }
         }
-        public IEnumerable<UserRestaurant> GetAllUserRestaurants()
+        public IEnumerable<UserRestaurant> GetAllUserRestaurantsByUserId(int userId)
         {
             var sql = @"select *
-                        from UserRestaurant";
+                        from UserRestaurant
+                        where UserId = @userId";
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var userRestaurants = db.Query<UserRestaurant>(sql);
+                var userRestaurants = db.Query<UserRestaurant>(sql, new { UserId = userId });
                 return userRestaurants;
             }
         }
 
-        public UserRestaurant GetSingleUserRestaurant(int restaurantId)
+        public UserWithRestaurantList GetUserWithRestaurants(int userId)
         {
-            var sql = @"select *
-                        from UserRestaurant
-                        where RestaurantId = @restaurantId";
+            var restaurantSql = @"select *
+                                from Restaurant
+                                order by DateAdded desc";
+
+            var userRes = @"select *
+                            from UserRestaurant
+                            where UserId = @userId";
+
+            var userSql = @"select *
+                            from [User]
+                            where UserId = @userId";
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var userRestaurant = db.QueryFirstOrDefault<UserRestaurant>(sql, new { RestaurantId = restaurantId });
+                var restaurants = db.Query<Restaurant>(restaurantSql);
+                var userRestaurants = db.Query<UserRestaurant>(userRes, new { UserId = userId });
+                var user = db.QueryFirstOrDefault<UserWithRestaurantList>(userSql, new { UserId = userId });
+                var restaurantList = new List<Restaurant>();
+
+                foreach (var restaurant in restaurants)
+                {
+                    foreach (var userRestaurant in userRestaurants)
+                    {
+                        if (restaurant.RestaurantId == userRestaurant.RestaurantId)
+                        {
+                            restaurantList.Add(restaurant);
+                        }
+                    }
+                }
+
+                user.Restaurants = restaurantList;
+                return user;
+            }
+        }
+
+        public UserRestaurant GetSingleUserRestaurantByUserId(int userId, int restaurantId)
+        {
+            var sql = @"select *
+                        from UserRestaurant
+                        where UserId = @userId and RestaurantId = @restaurantId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var userRestaurant = db.QueryFirstOrDefault<UserRestaurant>(sql, new { UserId = userId, RestaurantId = restaurantId });
                 return userRestaurant;
             }
         }
 
-        public IEnumerable<UserRestaurant> RemoveRestaurantFromProfile(int restaurantId)
+        public IEnumerable<UserRestaurant> RemoveRestaurantFromProfile(int userId, int restaurantId)
         {
             var sql = @"delete
                         from UserRestaurant
-                        where RestaurantId = @restaurantId";
+                        where RestaurantId = @restaurantId and UserId = @userId";
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                db.ExecuteAsync(sql, new { RestaurantId = restaurantId });
-                var userRestaurants = GetAllUserRestaurants();
+                db.ExecuteAsync(sql, new { RestaurantId = restaurantId, UserId = userId });
+                var userRestaurants = GetAllUserRestaurantsByUserId(userId);
                 return userRestaurants;
             }
         }

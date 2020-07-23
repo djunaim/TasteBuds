@@ -31,11 +31,22 @@ namespace TasteBuds.Controllers
             return Ok(result);
         }
 
-        // Add Restaurant to User //
-        [HttpPost("user/restaurantAdd")] 
-        public IActionResult AddRestaurant(UserRestaurant restaurantToAddToProfile)
+        [HttpGet("user/{userId}/restaurants")]
+        public IActionResult GetUserWithRestaurants(int userId)
         {
-            var existingUserRestaurant = _UserRepository.GetSingleUserRestaurant(restaurantToAddToProfile.RestaurantId);
+            var result = _UserRepository.GetUserWithRestaurants(userId);
+            if (result == null)
+            {
+                return NotFound("User does not have any restaurants saved.");
+            }
+            return Ok(result);
+        }
+
+        // Add Restaurant to User //
+        [HttpPost("user/{userId}/restaurantAdd")] 
+        public IActionResult AddRestaurant(int userId, UserRestaurant restaurantToAddToProfile)
+        {
+            var existingUserRestaurant = _UserRepository.GetSingleUserRestaurantByUserId(userId, restaurantToAddToProfile.RestaurantId);
             if (existingUserRestaurant == null)
             {
                 var result = _UserRepository.AddRestaurantToProfile(restaurantToAddToProfile);
@@ -44,17 +55,17 @@ namespace TasteBuds.Controllers
             return Ok(existingUserRestaurant);
         }
 
-        [HttpDelete("user/remove/{restaurantId}")]
-        public IActionResult RemoveRestaurantFromProfile(int restaurantId)
+        [HttpDelete("user/{userId}/remove/{restaurantId}")]
+        public IActionResult RemoveRestaurantFromProfile(int userId, int restaurantId)
         {
-            var result = _UserRepository.RemoveRestaurantFromProfile(restaurantId);
+            var result = _UserRepository.RemoveRestaurantFromProfile(userId, restaurantId);
             return Ok(result);
         }
 
-        [HttpGet("user/userRestaurant/{restaurantId}")]
-        public IActionResult GetSingleUserRestaurant(int restaurantId)
+        [HttpGet("user/{userId}/userRestaurant/{restaurantId}")]
+        public IActionResult GetSingleUserRestaurantByUserId(int userId, int restaurantId)
         {
-            var result = _UserRepository.GetSingleUserRestaurant(restaurantId);
+            var result = _UserRepository.GetSingleUserRestaurantByUserId(userId, restaurantId);
             if (result == null)
             {
                 return NotFound("That does not exist.");

@@ -53,7 +53,7 @@ class Profile extends Component {
           </Card>
         </div>
         <div className="friends container">
-          <h4>Friends</h4>
+          <h4>My Buds</h4>
           <div className="row">
             {
               friends.map((friend) => <FriendCard key={friend.friendShipId} friend={friend} />)

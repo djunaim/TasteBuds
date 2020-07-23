@@ -43,7 +43,7 @@ namespace TasteBuds.DataAccess
             }
         }
 
-        public Restaurant GetSingleRestaurant(int restaurantId)
+        public RestaurantWithUsers GetSingleRestaurant(int restaurantId)
         {
             var sql = @"select *
                         from Restaurant
@@ -51,7 +51,7 @@ namespace TasteBuds.DataAccess
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var restaurant = db.QueryFirstOrDefault<Restaurant>(sql, new { RestaurantId = restaurantId });
+                var restaurant = db.QueryFirstOrDefault<RestaurantWithUsers>(sql, new { RestaurantId = restaurantId });
                 return restaurant;
             }
         }
@@ -76,18 +76,28 @@ namespace TasteBuds.DataAccess
                 var users = db.Query<User>(usersSql);
                 var friendsList = new List<User>();
 
-                foreach (var userRestaurant in userRestaurants)
+                if (restaurant == null)
                 {
-                    foreach (var user in users)
+                    var singleRestaurant = GetSingleRestaurant(restaurantId);
+                    return singleRestaurant;
+                }
+                else
+                {
+                    foreach (var userRestaurant in userRestaurants)
                     {
-                        if (userRestaurant.UserId == user.UserId)
+                        foreach (var user in users)
                         {
-                            friendsList.Add(user);
+                            if (userRestaurant.UserId == user.UserId)
+                            {
+                                friendsList.Add(user);
+                            }
                         }
                     }
+                    restaurant.Friends = friendsList;
+                    return restaurant;
                 }
-                restaurant.Friends = friendsList;
-                return restaurant;
+
+
             }
         }
 

@@ -14,3 +14,13 @@ values (2, 17838043),
 		(4, 17955135),
 		(5, 16728262),
 		(5, 17194353)
+
+select *
+from UserRestaurant
+
+update UserRestaurant
+set UserId = 2
+where RestaurantId = 16853333
+
+insert into UserRestaurant (UserId, RestaurantId)
+values (3, 16843631)
