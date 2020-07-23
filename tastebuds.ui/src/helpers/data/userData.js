@@ -30,7 +30,16 @@ const getUserWithRestaurants = (userId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error, 'errFromUserWithRestos'));
 });
 
-const addRestaurantToProfile = (restaurantObj) => axios.post(`${sqlBaseUrl}/user/restaurantAdd`, restaurantObj);
+const getSingleUserRestaurantByUserId = (userId, restaurantId) => new Promise((resolve, reject) => {
+  axios.get(`${sqlBaseUrl}/user/${userId}/userRestaurant/${restaurantId}`)
+    .then((response) => {
+      const singleUserRestaurantByUserId = response.data;
+      resolve(singleUserRestaurantByUserId);
+    })
+    .catch((error) => reject(error, 'errFromSingleUserRestaurantByUserId'));
+});
+
+const addRestaurantToProfile = (userId, restaurantObj) => axios.post(`${sqlBaseUrl}/user/${userId}/restaurantAdd`, restaurantObj);
 
 const deleteUserRestaurant = (userId, restaurantId) => axios.delete(`${sqlBaseUrl}/user/${userId}/remove/${restaurantId}`);
 
@@ -40,4 +49,5 @@ export default {
   deleteUserRestaurant,
   getFriends,
   getUserWithRestaurants,
+  getSingleUserRestaurantByUserId,
 };

@@ -43,10 +43,10 @@ namespace TasteBuds.Controllers
         }
 
         // Add Restaurant to User //
-        [HttpPost("user/restaurantAdd")] 
-        public IActionResult AddRestaurant(UserRestaurant restaurantToAddToProfile)
+        [HttpPost("user/{userId}/restaurantAdd")] 
+        public IActionResult AddRestaurant(int userId, UserRestaurant restaurantToAddToProfile)
         {
-            var existingUserRestaurant = _UserRepository.GetSingleUserRestaurant(restaurantToAddToProfile.RestaurantId);
+            var existingUserRestaurant = _UserRepository.GetSingleUserRestaurantByUserId(userId, restaurantToAddToProfile.RestaurantId);
             if (existingUserRestaurant == null)
             {
                 var result = _UserRepository.AddRestaurantToProfile(restaurantToAddToProfile);
@@ -62,10 +62,10 @@ namespace TasteBuds.Controllers
             return Ok(result);
         }
 
-        [HttpGet("user/userRestaurant/{restaurantId}")]
-        public IActionResult GetSingleUserRestaurant(int restaurantId)
+        [HttpGet("user/{userId}/userRestaurant/{restaurantId}")]
+        public IActionResult GetSingleUserRestaurantByUserId(int userId, int restaurantId)
         {
-            var result = _UserRepository.GetSingleUserRestaurant(restaurantId);
+            var result = _UserRepository.GetSingleUserRestaurantByUserId(userId, restaurantId);
             if (result == null)
             {
                 return NotFound("That does not exist.");

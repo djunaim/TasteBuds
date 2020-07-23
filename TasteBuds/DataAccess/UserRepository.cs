@@ -91,15 +91,15 @@ namespace TasteBuds.DataAccess
             }
         }
 
-        public UserRestaurant GetSingleUserRestaurant(int restaurantId)
+        public UserRestaurant GetSingleUserRestaurantByUserId(int userId, int restaurantId)
         {
             var sql = @"select *
                         from UserRestaurant
-                        where RestaurantId = @restaurantId";
+                        where UserId = @userId and RestaurantId = @restaurantId";
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var userRestaurant = db.QueryFirstOrDefault<UserRestaurant>(sql, new { RestaurantId = restaurantId });
+                var userRestaurant = db.QueryFirstOrDefault<UserRestaurant>(sql, new { UserId = userId, RestaurantId = restaurantId });
                 return userRestaurant;
             }
         }
