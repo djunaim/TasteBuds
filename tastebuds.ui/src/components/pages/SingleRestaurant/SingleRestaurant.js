@@ -115,27 +115,27 @@ class SingleRestaurant extends Component {
             }
             <Card.Body>
               <Card.Text>
-                <strong>Hours: </strong>
+                <h5>Hours:</h5>
                 {
                   restaurant.timings === ''
                     ? (' Unavailable')
                     : restaurant.timings
                 }
               </Card.Text>
-                <strong>Highlights: </strong>
+                <h5>Highlights:</h5>
                 {
                   highlights.map((highlight) => <Card.Text>{highlight}</Card.Text>)
                 }
               <Card.Text>
-                <strong>Phone Number: </strong>{restaurant.phone_numbers}
+                <h5>Phone Number:</h5>{restaurant.phone_numbers}
               </Card.Text>
               <Card.Text>
-                <strong>Website: </strong>{restaurant.url}
+                <h5>Website:</h5>{restaurant.url}
               </Card.Text>
               <Card.Text>
-                <strong>Location: </strong>{location.address}
+                <h5>Location:</h5>{location.address}
               </Card.Text>
-                <strong>Buds With Same Taste:</strong>
+                <h5>Buds With Same Taste:</h5>
                 {
                   buds.length !== 0
                     ? (
