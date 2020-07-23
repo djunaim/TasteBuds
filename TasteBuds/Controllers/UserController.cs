@@ -31,6 +31,17 @@ namespace TasteBuds.Controllers
             return Ok(result);
         }
 
+        [HttpGet("user/{userId}/restaurants")]
+        public IActionResult GetUserWithRestaurants(int userId)
+        {
+            var result = _UserRepository.GetUserWithRestaurants(userId);
+            if (result == null)
+            {
+                return NotFound("User does not have any restaurants saved.");
+            }
+            return Ok(result);
+        }
+
         // Add Restaurant to User //
         [HttpPost("user/restaurantAdd")] 
         public IActionResult AddRestaurant(UserRestaurant restaurantToAddToProfile)
@@ -44,10 +55,10 @@ namespace TasteBuds.Controllers
             return Ok(existingUserRestaurant);
         }
 
-        [HttpDelete("user/remove/{restaurantId}")]
-        public IActionResult RemoveRestaurantFromProfile(int restaurantId)
+        [HttpDelete("user/{userId}/remove/{restaurantId}")]
+        public IActionResult RemoveRestaurantFromProfile(int userId, int restaurantId)
         {
-            var result = _UserRepository.RemoveRestaurantFromProfile(restaurantId);
+            var result = _UserRepository.RemoveRestaurantFromProfile(userId, restaurantId);
             return Ok(result);
         }
 

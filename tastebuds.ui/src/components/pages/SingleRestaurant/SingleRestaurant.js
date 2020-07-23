@@ -83,7 +83,8 @@ class SingleRestaurant extends Component {
   deleteUserRestaurantEvent = (e) => {
     e.preventDefault();
     const { restaurantId } = this.props.match.params;
-    userData.deleteUserRestaurant(restaurantId)
+    const userId = sessionStorage.getItem('userId');
+    userData.deleteUserRestaurant(userId, restaurantId)
       .then(() => this.deleteRestaurant())
       .catch((error) => console.error(error, 'errFromDeleteUserRestaurant'));
   }

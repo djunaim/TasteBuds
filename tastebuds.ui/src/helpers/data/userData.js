@@ -21,13 +21,23 @@ const getFriends = () => new Promise((resolve, reject) => {
     .catch((errFromGetFriends) => reject(errFromGetFriends));
 });
 
+const getUserWithRestaurants = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${sqlBaseUrl}/user/${userId}/restaurants`)
+    .then((response) => {
+      const userWithRestaurants = response.data;
+      resolve(userWithRestaurants);
+    })
+    .catch((error) => reject(error, 'errFromUserWithRestos'));
+});
+
 const addRestaurantToProfile = (restaurantObj) => axios.post(`${sqlBaseUrl}/user/restaurantAdd`, restaurantObj);
 
-const deleteUserRestaurant = (restaurantId) => axios.delete(`${sqlBaseUrl}/user/remove/${restaurantId}`);
+const deleteUserRestaurant = (userId, restaurantId) => axios.delete(`${sqlBaseUrl}/user/${userId}/remove/${restaurantId}`);
 
 export default {
   getUser,
   addRestaurantToProfile,
   deleteUserRestaurant,
   getFriends,
+  getUserWithRestaurants,
 };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './SavedRestaurants.scss';
-import restaurantData from '../../../helpers/data/restaurantData';
 import RestaurantDBCard from '../../shared/RestaurantDBCard/RestaurantDBCard';
+import userData from '../../../helpers/data/userData';
 
 class SavedRestaurants extends Component {
   state = {
@@ -9,8 +9,9 @@ class SavedRestaurants extends Component {
   }
 
   componentDidMount() {
-    restaurantData.getAllRestaurants()
-      .then((restaurants) => this.setState({ restaurants }))
+    const userId = sessionStorage.getItem('userId');
+    userData.getUserWithRestaurants(userId)
+      .then((response) => this.setState({ restaurants: response.restaurants }))
       .catch((error) => console.error(error, 'errFromAllRestaurants'));
   }
 
