@@ -56,7 +56,7 @@ class Profile extends Component {
           <h4>My Buds</h4>
           <div className="row">
             {
-              friends.map((friend) => <FriendCard key={friend.friendShipId} friend={friend} />)
+              friends.map((friend) => <FriendCard key={friend.friendshipId} friend={friend} />)
             }
           </div>
         </div>
