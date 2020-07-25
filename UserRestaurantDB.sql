@@ -17,10 +17,11 @@ values (2, 17838043),
 
 select *
 from UserRestaurant
+where UserId = 4
 
 update UserRestaurant
 set UserId = 2
 where RestaurantId = 16853333
 
 insert into UserRestaurant (UserId, RestaurantId)
-values (3, 16843631)
+values (4, 16843631)
