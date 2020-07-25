@@ -31,6 +31,18 @@ namespace TasteBuds.Controllers
             return Ok(result);
         }
 
+        // Get Single User By Id // 
+        [HttpGet("user/{userId}")]
+        public IActionResult GetSingleUserById(int userId)
+        {
+            var result = _UserRepository.GetSingleUserById(userId);
+            if (result == null)
+            {
+                return NotFound("User does not exist.");
+            }
+            return Ok(result);
+        }
+
         [HttpGet("user/{userId}/restaurants")]
         public IActionResult GetUserWithRestaurants(int userId)
         {
