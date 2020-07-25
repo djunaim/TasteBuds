@@ -114,8 +114,6 @@ class SingleRestaurant extends Component {
       buds,
     } = this.state;
 
-    const { userId } = buds;
-
     return (
       <div className="SingleRestaurant">
         <div className="container">
@@ -152,7 +150,7 @@ class SingleRestaurant extends Component {
                 {
                   buds.length !== 0
                     ? (
-                      buds.map((buddy) => <Link to={`/profile/${userId}/savedRestaurants`}>{buddy.firstName} {buddy.lastName}</Link>)
+                      buds.map((buddy) => <p><Link to={`/profile/${buddy.userId}/savedRestaurants`}>{buddy.firstName} {buddy.lastName}</Link></p>)
                     )
                     : (' No buds with same taste yet')
                 }
