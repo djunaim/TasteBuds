@@ -12,6 +12,15 @@ const getUser = (email) => new Promise((resolve, reject) => {
     .catch((errFromGetUser) => reject(errFromGetUser));
 });
 
+const getUserById = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${sqlBaseUrl}/user/${userId}`)
+    .then((response) => {
+      const user = response.data;
+      resolve(user);
+    })
+    .catch((error) => reject(error, 'errFromGetSingleUserById'));
+});
+
 const getFriends = () => new Promise((resolve, reject) => {
   axios.get(`${sqlBaseUrl}/user/friends`)
     .then((response) => {
@@ -50,4 +59,5 @@ export default {
   getFriends,
   getUserWithRestaurants,
   getSingleUserRestaurantByUserId,
+  getUserById,
 };

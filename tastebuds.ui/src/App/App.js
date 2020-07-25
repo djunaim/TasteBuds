@@ -55,8 +55,8 @@ class App extends React.Component {
           <Navbar authed={authed} />
           <Switch>
             <Route path="/" exact component={Home} />
-            <PrivateRoute path="/profile" exact component={Profile} authed={authed} />
-            <PrivateRoute path="/profile/savedRestaurants" exact component={SavedRestaurants} authed={authed} />
+            <PrivateRoute path="/profile/:userId" exact component={Profile} authed={authed} />
+            <PrivateRoute path="/profile/:userId/savedRestaurants" exact component={SavedRestaurants} authed={authed} />
             <Route path="/findTaste" exact component={RestaurantForm} />
             <Route path="/restaurants/:restaurantId" exact component={SingleRestaurant} />
           </Switch>

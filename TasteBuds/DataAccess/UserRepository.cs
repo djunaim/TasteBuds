@@ -151,16 +151,16 @@ namespace TasteBuds.DataAccess
             }
         }
 
-        public IEnumerable<UserName> GetFriends()
+        public IEnumerable<UserFriend> GetFriends()
         {
-            var sql = @"select FirstName, LastName, FriendshipId
+            var sql = @"select *
                         from Friendship
 	                        join [User]
 	                        on Friendship.UserId2 = [User].UserId";
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var result = db.Query<UserName>(sql);
+                var result = db.Query<UserFriend>(sql);
                 return result;
             }
         }

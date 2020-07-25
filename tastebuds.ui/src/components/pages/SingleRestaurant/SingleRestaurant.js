@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import './SingleRestaurant.scss';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 import restaurantData from '../../../helpers/data/restaurantData';
 import userData from '../../../helpers/data/userData';
 
@@ -149,7 +150,7 @@ class SingleRestaurant extends Component {
                 {
                   buds.length !== 0
                     ? (
-                      buds.map((buddy) => <Card.Text>{buddy.firstName} {buddy.lastName}</Card.Text>)
+                      buds.map((buddy) => <p><Link to={`/profile/${buddy.userId}/savedRestaurants`}>{buddy.firstName} {buddy.lastName}</Link></p>)
                     )
                     : (' No buds with same taste yet')
                 }
