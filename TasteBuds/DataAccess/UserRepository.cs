@@ -153,7 +153,7 @@ namespace TasteBuds.DataAccess
 
         public IEnumerable<UserName> GetFriends()
         {
-            var sql = @"select FirstName, LastName
+            var sql = @"select FirstName, LastName, FriendshipId
                         from Friendship
 	                        join [User]
 	                        on Friendship.UserId2 = [User].UserId";

@@ -32,16 +32,26 @@ class SingleRestaurant extends Component {
       .then((response) => {
         if (response.length !== 0) {
           this.setState({ restaurantInProfile: true });
+        } else {
+          this.setState({ restaurantInProfile: false });
         }
       })
-      .catch((error) => console.error(error, 'errFromRestaurantProfileCheck'));
+      .catch((error) => {
+        if (error.response.status !== 404) {
+          console.error(error, 'errFromRestaurantProfileCheck');
+        }
+      });
   }
 
   getSingleRestaurantWithUsers = () => {
     const { restaurantId } = this.props.match.params;
     restaurantData.getSingleRestaurantWithUsers(restaurantId)
       .then((restaurantWithUsers) => this.setState({ buds: restaurantWithUsers.friends }))
-      .catch((error) => console.error(error, 'errFromGetSingleRestaurantWithUsers'));
+      .catch((error) => {
+        if (error.response.status !== 404) {
+          console.error(error, 'errFromGetSingleRestaurantWithUsers');
+        }
+      });
   }
 
   addRestaurantToProfile = () => {
@@ -124,7 +134,7 @@ class SingleRestaurant extends Component {
               </Card.Text>
                 <h5>Highlights:</h5>
                 {
-                  highlights.map((highlight) => <Card.Text>{highlight}</Card.Text>)
+                  highlights.map((highlight) => <Card.Text key={[highlight]} >{highlight}</Card.Text>)
                 }
               <Card.Text>
                 <h5>Phone Number:</h5>{restaurant.phone_numbers}

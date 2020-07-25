@@ -24,7 +24,7 @@ class SavedRestaurants extends Component {
           <h1>My Tastes</h1>
           <div className="row">
             {
-              restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.id} restaurant={restaurant} />)
+              restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} />)
             }
           </div>
         </div>
