@@ -65,7 +65,7 @@ class SingleRestaurant extends Component {
       userId: parseInt(userId),
     };
     userData.addRestaurantToProfile(userId, newUserRestaurant)
-      .then(() => this.props.history.push('/profile/savedRestaurants'))
+      .then(() => this.props.history.push(`/profile/${userId}/savedRestaurants`))
       .catch((error) => console.error(error, 'errFromAddRestaurantToProfile'));
   }
 
@@ -100,8 +100,9 @@ class SingleRestaurant extends Component {
 
   deleteRestaurant = () => {
     const { restaurantId } = this.props.match.params;
+    const userId = sessionStorage.getItem('userId');
     restaurantData.deleteRestaurant(restaurantId)
-      .then(() => this.props.history.push('/profile/savedRestaurants'))
+      .then(() => this.props.history.push(`/profile/${userId}/savedRestaurants`))
       .catch((error) => console.error(error, 'errFromDeleteRestauant'));
   }
 
