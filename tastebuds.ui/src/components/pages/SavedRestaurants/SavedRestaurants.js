@@ -9,7 +9,7 @@ class SavedRestaurants extends Component {
   }
 
   componentDidMount() {
-    const userId = sessionStorage.getItem('userId');
+    const { userId } = this.props.match.params;
     userData.getUserWithRestaurants(userId)
       .then((response) => this.setState({ restaurants: response.restaurants }))
       .catch((error) => console.error(error, 'errFromAllRestaurants'));
