@@ -26,6 +26,7 @@ class NavBar extends Component {
 
   render() {
     const { authed } = this.props;
+    const userId = sessionStorage.getItem('userId');
 
     return (
       <div className="Navbar">
@@ -41,10 +42,10 @@ class NavBar extends Component {
               <Link className="nav-link" to="/">Home</Link>
               <Link className="nav-link" to="/findTaste">Tasty Adventure</Link>
               {
-                authed ? (<Link className="nav-link" to="/profile">Profile</Link>) : ('')
+                authed ? (<Link className="nav-link" to={`/profile/${userId}`}>Profile</Link>) : ('')
               }
               {
-                authed ? (<Link className="nav-link" to="/profile/savedRestaurants">My Taste</Link>) : ('')
+                authed ? (<Link className="nav-link" to={`/profile/${userId}/savedRestaurants`}>My Tastes</Link>) : ('')
               }
               {
                 !authed ? (<Link to="/" className="btn btn-primary" onClick={this.loginClickEvent}>Login</Link>) : (<Link to="/" className="btn btn-danger" onClick={this.logoutClickEvent}>Log Out</Link>)

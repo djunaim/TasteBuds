@@ -4,11 +4,15 @@ import './FriendCard.scss';
 
 class FriendCard extends Component {
   render() {
-    const { firstName, lastName } = this.props.friend;
+    const {
+      firstName,
+      lastName,
+      userId2,
+    } = this.props.friend;
     return (
       <div className="FriendCard col-md-4">
         <div className="d-flex justify-content-center">
-          <Card style={{ width: '30rem' }} className="h-100" border="primary">
+          <Card style={{ width: '30rem' }} className="h-100" border="dark" id={userId2}>
               <Card.Title>Account Details</Card.Title>
               <Card.Body>
                 <Card.Text>

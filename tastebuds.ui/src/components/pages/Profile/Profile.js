@@ -32,6 +32,7 @@ class Profile extends Component {
 
   render() {
     const { user, friends } = this.state;
+    const userId = sessionStorage.getItem('userId');
 
     return (
       <div className="Profile">
@@ -48,7 +49,7 @@ class Profile extends Component {
               </Card.Text>
             </Card.Body>
             <Card.Footer className="mb-0">
-              <Link to="/profile/savedRestaurants" className="btn btn-outline-dark">My Tastes</Link>
+              <Link to={`/profile/${userId}/savedRestaurants`} className="btn btn-outline-dark">My Tastes</Link>
             </Card.Footer>
           </Card>
         </div>
