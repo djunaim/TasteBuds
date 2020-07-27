@@ -142,7 +142,7 @@ class SingleRestaurant extends Component {
                 <h5>Phone Number:</h5>{restaurant.phone_numbers}
               </Card.Text>
               <Card.Text>
-                <h5>Website:</h5>{restaurant.url}
+                <h5>Website:</h5> <a href={restaurant.url}>{restaurant.url}</a>
               </Card.Text>
               <Card.Text>
                 <h5>Location:</h5>{location.address}
@@ -151,7 +151,7 @@ class SingleRestaurant extends Component {
                 {
                   buds.length !== 0
                     ? (
-                      buds.map((buddy) => <p><Link to={`/profile/${buddy.userId}/savedRestaurants`}>{buddy.firstName} {buddy.lastName}</Link></p>)
+                      buds.map((buddy) => <p><Link display="dark" to={`/profile/${buddy.userId}/savedRestaurants`}>{buddy.firstName} {buddy.lastName}</Link></p>)
                     )
                     : (' No buds with same taste yet')
                 }
