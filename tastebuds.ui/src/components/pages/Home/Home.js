@@ -61,7 +61,7 @@ class Home extends Component {
             <h4>Other Tastes You Would Like Based on Your Buds</h4>
             <Carousel>
               {
-                restaurants.map((restaurant) => <Carousel.Item><RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} /></Carousel.Item>)
+                restaurants.map((restaurant) => <Carousel.Item key={restaurant.restaurantId}><RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} /></Carousel.Item>)
               }
             </Carousel>
           </div>
