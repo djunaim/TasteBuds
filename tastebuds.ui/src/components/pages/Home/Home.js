@@ -64,11 +64,6 @@ class Home extends Component {
                 restaurants.map((restaurant) => <Carousel.Item><RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} /></Carousel.Item>)
               }
             </Carousel>
-            {/* <div className="row">
-              {
-                restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} />)
-              }
-            </div> */}
           </div>
         <div className="parallax"></div>
       </div>
