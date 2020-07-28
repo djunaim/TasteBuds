@@ -103,6 +103,65 @@ namespace TasteBuds.DataAccess
             }
         }
 
+        public List<Restaurant> GetRestaurantRecsForUser1()
+        {
+            var restaurantSql = @"select *
+                                from Restaurant";
+
+            var otherUserResSql = @"select distinct RestaurantId
+                                    from UserRestaurant
+                                    where UserId != 1";
+
+            var userRes1Sql = @"select distinct RestaurantId
+                                from UserRestaurant
+                                where UserId = 1";
+
+            //var usersSql = @"select *
+            //                from [User]
+            //                 join Friendship
+            //                 on [User].UserId = Friendship.UserId2";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var restaurants = db.Query<Restaurant>(restaurantSql);
+                var userRestaurantsNotUser1 = db.Query<UserRestaurant>(otherUserResSql);
+                var user1UserRestaurants = db.Query<UserRestaurant>(userRes1Sql);
+                //var otherUsers = db.Query<User>(usersSql);
+                //var userRestaurantsList = new List<UserRestaurant>();
+                //var restaurantsList = new List<Restaurant>();
+
+                //foreach (var userRestaurant in userRestaurantsNotUser1)
+                //{
+                //    foreach (var user1UserRestaurant in user1UserRestaurants)
+                //    {
+                //        if (userRestaurant.RestaurantId != user1UserRestaurant.RestaurantId)
+                //        {
+                //            userRestaurantsList.Add(userRestaurant);
+                //        }
+                //    }
+                //}
+
+                //foreach (var restaurant in restaurants)
+                //{
+                //    foreach (var userRestaurant in user1UserRestaurants)
+                //    {
+                //        //foreach (var uR1 in user1UserRestaurants)
+                //        //{
+                //            if (restaurant.RestaurantId != userRestaurant.RestaurantId)
+                //            {
+                //                restaurantsList.Add(restaurant);
+                //            }
+                //        //}
+                //    }
+                //}
+
+                var restaurantsList = restaurants.Where(r => user1UserRestaurants.All(uR1 => uR1.RestaurantId != r.RestaurantId)).ToList();
+                
+                return restaurantsList;
+                
+            }
+        }
+
         public IEnumerable<Restaurant> RemoveRestaurant(int restaurantId)
         {
             var sql = @"delete

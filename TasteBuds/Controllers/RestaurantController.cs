@@ -67,6 +67,19 @@ namespace TasteBuds.Controllers
             return Ok(result);
         }
 
+        // Get List of Restaurants for User 1 //
+        [HttpGet("restaurant/recommendations")]
+
+        public IActionResult GetRestaurantRecsForUser1()
+        {
+            var result = _RestaurantRepository.GetRestaurantRecsForUser1();
+            if (result == null)
+            {
+                return NotFound("No restaurants to recommend");
+            }
+            return Ok(result);
+        }
+
         [HttpDelete("restaurant/remove/{restaurantId}")]
         public IActionResult RemoveRestaurant(int restaurantId)
         {
