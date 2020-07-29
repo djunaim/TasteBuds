@@ -3,9 +3,29 @@ import React, { Component } from 'react';
 import './Home.scss';
 import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
+import HorizontalScroll from 'react-scroll-horizontal';
+import restaurantData from '../../../helpers/data/restaurantData';
+import RestaurantDBCard from '../../shared/RestaurantDBCard/RestaurantDBCard';
 
 class Home extends Component {
+  state = {
+    restaurants: [],
+  }
+
+  componentDidMount() {
+    this.getRestaurantRecs();
+  }
+
+  getRestaurantRecs = () => {
+    restaurantData.getRestaurantRecs()
+      .then((restaurants) => this.setState({ restaurants }))
+      .catch((error) => console.error(error, 'errFromResRecs'));
+  }
+
   render() {
+    const { restaurants } = this.state;
+    const parent = { width: '100vw', height: '70vh' };
+
     return (
       <div className="Home">
         <div className="carousel">
@@ -38,6 +58,15 @@ class Home extends Component {
           <p>Taste Buds came from an idea that everyone eats, but not everyone knows where to go. It's an app for foodies created by foodies. So, you know you'll be hooked up to some amazing spots if you stick with us. Whether you're alone or with friends, let Taste Buds lead you the way to some tasty adventures. After all, the stomach wants what it wants. If you're ready to start, then let's</p>
           <Link to="/findTaste" className="btn btn-outline-secondary">Go On A Tasty Adventure!</Link>
         </div>
+        <div className="parallax"></div>
+          <div className="restaurantsContainer">
+            <h4>Other Tastes You Would Like Based on Your Buds</h4>
+            <HorizontalScroll style={parent}>
+              {
+                restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} />)
+              }
+            </HorizontalScroll>
+          </div>
         <div className="parallax"></div>
       </div>
     );

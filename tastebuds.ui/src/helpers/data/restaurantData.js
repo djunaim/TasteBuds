@@ -47,6 +47,15 @@ const getSingleRestaurantWithUsers = (restaurantId) => new Promise((resolve, rej
     .catch((error) => reject(error, 'errFromGetSingleRestoWithUsers'));
 });
 
+const getRestaurantRecs = () => new Promise((resolve, reject) => {
+  axios.get(`${sqlBaseUrl}/restaurant/recommendations`)
+    .then((result) => {
+      const restaurantRecs = result.data;
+      resolve(restaurantRecs);
+    })
+    .catch((error) => reject(error, 'errFromRestaurantRects'));
+});
+
 export default {
   getRestaurant,
   addRestaurant,
@@ -54,4 +63,5 @@ export default {
   deleteRestaurant,
   getSingleRestaurant,
   getSingleRestaurantWithUsers,
+  getRestaurantRecs,
 };

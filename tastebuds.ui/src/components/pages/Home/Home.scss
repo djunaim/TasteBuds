@@ -1,7 +1,17 @@
-.Home {
-  background-color: white;
-  color: #777;
+.Home, .restaurantsContainer {
+  // background-color: white;
+  background-image: url("https://images.unsplash.com/photo-1565878025373-d29620e25e32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  // color: #777;
+  h4 {
+    color: white;
+    font-weight: bold;
+  }
   font-weight: bold;
+  overflow: hidden;
 }
 
 .carousel-item {
@@ -25,6 +35,7 @@
 
 .about {
   margin: 50px;
+  color: white;
   p {
     font-size: larger;
     margin-left: 45px;
@@ -32,6 +43,16 @@
     padding-top: 16px;
   }
   :Link {
+    color: white;
     margin-bottom: 16px;
   }
+}
+
+
+.restaurantChild {
+  transform: translate3d(0px, 0px, 0px);
+  display: inline-flex;
+  height: 100%;
+  position: absolute;
+  will-change: transform;
 }

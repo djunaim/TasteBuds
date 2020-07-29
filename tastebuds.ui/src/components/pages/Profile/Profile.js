@@ -4,17 +4,21 @@ import Card from 'react-bootstrap/Card';
 import './Profile.scss';
 import userData from '../../../helpers/data/userData';
 import FriendCard from '../../shared/FriendCard/FriendCard';
+import restaurantData from '../../../helpers/data/restaurantData';
+import RestaurantDBCard from '../../shared/RestaurantDBCard/RestaurantDBCard';
 
 class Profile extends Component {
   state = {
     email: 'modjun12@gmail.com',
     user: [],
     friends: [],
+    restaurants: [],
   }
 
   componentDidMount() {
     this.getUser();
     this.getFriends();
+    this.getRestaurantRecs();
   }
 
   getUser = () => {
@@ -30,8 +34,18 @@ class Profile extends Component {
       .catch((error) => console.error(error, 'errFromGetFriends'));
   }
 
+  getRestaurantRecs = () => {
+    restaurantData.getRestaurantRecs()
+      .then((restaurants) => this.setState({ restaurants }))
+      .catch((error) => console.error(error, 'errFromResRecs'));
+  }
+
   render() {
-    const { user, friends } = this.state;
+    const {
+      user,
+      friends,
+      restaurants,
+    } = this.state;
     const userId = sessionStorage.getItem('userId');
 
     return (
@@ -53,11 +67,17 @@ class Profile extends Component {
             </Card.Footer>
           </Card>
         </div>
-        <div className="friends container">
+        <div className="friends restaurants container">
           <h4>My Buds</h4>
           <div className="row">
             {
               friends.map((friend) => <FriendCard key={friend.friendshipId} friend={friend} />)
+            }
+          </div>
+          <h4>Other Tastes You Would Like Based on Your Buds</h4>
+          <div className="row">
+            {
+              restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} />)
             }
           </div>
         </div>
