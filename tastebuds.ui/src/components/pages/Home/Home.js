@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './Home.scss';
 import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
+import HorizontalScroll from 'react-scroll-horizontal';
 import restaurantData from '../../../helpers/data/restaurantData';
 import RestaurantDBCard from '../../shared/RestaurantDBCard/RestaurantDBCard';
 
@@ -23,6 +24,7 @@ class Home extends Component {
 
   render() {
     const { restaurants } = this.state;
+    const parent = { width: '100vw', height: '70vh' };
 
     return (
       <div className="Home">
@@ -59,11 +61,11 @@ class Home extends Component {
         <div className="parallax"></div>
           <div className="restaurantsContainer">
             <h4>Other Tastes You Would Like Based on Your Buds</h4>
-            <Carousel>
+            <HorizontalScroll style={parent}>
               {
-                restaurants.map((restaurant) => <Carousel.Item key={restaurant.restaurantId}><RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} /></Carousel.Item>)
+                restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} />)
               }
-            </Carousel>
+            </HorizontalScroll>
           </div>
         <div className="parallax"></div>
       </div>

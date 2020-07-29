@@ -2,6 +2,7 @@
   background-color: white;
   color: #777;
   font-weight: bold;
+  overflow: hidden;
 }
 
 .carousel-item {
@@ -34,4 +35,13 @@
   :Link {
     margin-bottom: 16px;
   }
+}
+
+
+.restaurantChild {
+  transform: translate3d(0px, 0px, 0px);
+  display: inline-flex;
+  height: 100%;
+  position: absolute;
+  will-change: transform;
 }
