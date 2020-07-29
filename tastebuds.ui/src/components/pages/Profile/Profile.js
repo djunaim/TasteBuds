@@ -74,7 +74,7 @@ class Profile extends Component {
               friends.map((friend) => <FriendCard key={friend.friendshipId} friend={friend} />)
             }
           </div>
-          <h4>Other Tastes You Would Like Based on Your Buds</h4>
+          <h4>Taste Tests</h4>
           <div className="row">
             {
               restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} />)

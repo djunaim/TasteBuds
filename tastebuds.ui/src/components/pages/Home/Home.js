@@ -24,7 +24,7 @@ class Home extends Component {
 
   render() {
     const { restaurants } = this.state;
-    const parent = { width: '100vw', height: '70vh' };
+    const parent = { width: '100vw', height: '55vh' };
 
     return (
       <div className="Home">
@@ -60,7 +60,7 @@ class Home extends Component {
         </div>
         <div className="parallax"></div>
           <div className="restaurantsContainer">
-            <h4>Other Tastes You Would Like Based on Your Buds</h4>
+            <h4>Taste Tests</h4>
             <HorizontalScroll style={parent}>
               {
                 restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} />)
