@@ -20,7 +20,7 @@ class RestaurantCard extends Component {
           {
             thumb
               ? (<Card.Img variant="top" src={thumb} />)
-              : (<Card.Img variant="top" src="https://raw.githubusercontent.com/djunaim/TasteBuds/master/tastebuds.ui/src/components/shared/Navbar/assets/taste%20%2B%20buds.png" />)
+              : (<Card.Img variant="top" src="https://raw.githubusercontent.com/djunaim/TasteBuds/master/tastebuds.ui/src/components/shared/RestaurantCard/assets/taste%20buds.png" />)
           }
           <Card.Title>{name}</Card.Title>
             <Card.Text>

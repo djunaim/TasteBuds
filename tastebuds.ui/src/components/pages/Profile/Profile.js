@@ -77,7 +77,7 @@ class Profile extends Component {
           </div>
         </div>
         <div className="restaurants container">
-          <h4>Taste Tests Based on Your Buds</h4>
+          <h4>Recommended Taste Tests Based on Your Buds</h4>
           <div className="row">
             {
               restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} />)

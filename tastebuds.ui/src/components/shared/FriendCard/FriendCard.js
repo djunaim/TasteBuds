@@ -14,7 +14,6 @@ class FriendCard extends Component {
       <div className="FriendCard">
         <div className="d-flex justify-content-center">
           <Card style={{ width: '30rem' }} className="h-100" border="dark" id={userId2}>
-            <Card.Title>Account Details</Card.Title>
             <Card.Body>
               <Card.Text>
                 User Name: {firstName} {lastName}
