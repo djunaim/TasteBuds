@@ -60,7 +60,7 @@ class Home extends Component {
         </div>
         <div className="parallax"></div>
           <div className="restaurantsContainer">
-            <h4>Taste Tests Based on Your Buds</h4>
+            <h4>Recommended Taste Tests Based on Your Buds</h4>
             <HorizontalScroll style={parent}>
               {
                 restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} />)
