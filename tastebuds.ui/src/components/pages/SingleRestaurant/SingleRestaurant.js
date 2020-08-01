@@ -123,7 +123,7 @@ class SingleRestaurant extends Component {
             {
               restaurant.featured_image !== ''
                 ? (<Card.Img variant="top" src={restaurant.featured_image} />)
-                : (<Card.Img variant="top" src="https://images.unsplash.com/photo-1580906462791-1ccc3195aa34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />)
+                : (<Card.Img variant="top" src="https://raw.githubusercontent.com/djunaim/TasteBuds/master/tastebuds.ui/src/components/shared/Navbar/assets/taste%20%2B%20buds.png" />)
             }
             <Card.Body>
               <Card.Text>

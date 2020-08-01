@@ -48,7 +48,7 @@ class NavBar extends Component {
                 authed ? (<Link className="nav-link" to={`/profile/${userId}/savedRestaurants`}>My Tastes</Link>) : ('')
               }
               {
-                !authed ? (<Link to="/" className="btn btn-primary" onClick={this.loginClickEvent}>Login</Link>) : (<Link to="/" className="btn btn-danger" onClick={this.logoutClickEvent}>Log Out</Link>)
+                !authed ? (<Link to="/" className="btn btn-outline-success" onClick={this.loginClickEvent}>Login</Link>) : (<Link to="/" className="btn btn-outline-dark" onClick={this.logoutClickEvent}>Log Out</Link>)
               }
             </Nav>
           </Navbar.Collapse>
