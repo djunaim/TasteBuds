@@ -9,4 +9,9 @@
     padding-top: 10px;
     padding-bottom: 10px;
   }
+  .profileContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 }

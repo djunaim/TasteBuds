@@ -16,13 +16,13 @@ class RestaurantCard extends Component {
     return (
       <div className="RestaurantDBCard col-md-4" id={restaurantId}>
         <Card className="h-100" border="dark">
+          <Card.Body>
           {
             thumbNail
               ? (<Card.Img variant="top" src={thumbNail} />)
-              : (<Card.Img variant="top" src="https://images.unsplash.com/photo-1580906462791-1ccc3195aa34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />)
+              : (<Card.Img variant="top" src="https://raw.githubusercontent.com/djunaim/TasteBuds/master/tastebuds.ui/src/components/shared/Navbar/assets/taste%20%2B%20buds.png" />)
           }
           <Card.Title>{name}</Card.Title>
-          <Card.Body>
             <Card.Text>
               Average Cost for Two:
               {
