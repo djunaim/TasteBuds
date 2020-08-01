@@ -51,30 +51,33 @@ class Profile extends Component {
     return (
       <div className="Profile">
         <h1>Welcome {user.firstName}!</h1>
-        <div className="d-flex justify-content-center">
-        <Card style={{ width: '30rem' }} className="h-100" border="primary">
-            <Card.Title>Account Details</Card.Title>
-            <Card.Body>
-              <Card.Text>
-                User Name: {user.firstName} {user.lastName}
-              </Card.Text>
-              <Card.Text>
-                User Email: {user.email}
-              </Card.Text>
-            </Card.Body>
-            <Card.Footer className="mb-0">
-              <Link to={`/profile/${userId}/savedRestaurants`} className="btn btn-outline-dark">My Tastes</Link>
-            </Card.Footer>
-          </Card>
-        </div>
-        <div className="friends restaurants container">
-          <h4>My Buds</h4>
-          <div className="row">
-            {
-              friends.map((friend) => <FriendCard key={friend.friendshipId} friend={friend} />)
-            }
+        <div className="profileContainer container">
+          <div className="myAccount">
+            <h4>My Account</h4>
+            <Card style={{ width: '30rem' }} border="primary">
+              <Card.Title>Account Details</Card.Title>
+              <Card.Body>
+                <Card.Text>
+                  User Name: {user.firstName} {user.lastName}
+                </Card.Text>
+                <Card.Text>
+                  User Email: {user.email}
+                </Card.Text>
+              </Card.Body>
+              <Card.Footer className="mb-0">
+                <Link to={`/profile/${userId}/savedRestaurants`} className="btn btn-outline-dark">My Tastes</Link>
+              </Card.Footer>
+            </Card>
           </div>
-          <h4>Taste Tests</h4>
+          <div className="friends">
+            <h4>My Buds</h4>
+              {
+                friends.map((friend) => <FriendCard key={friend.friendshipId} friend={friend} />)
+              }
+          </div>
+        </div>
+        <div className="restaurants container">
+          <h4>Taste Tests Based on Your Buds</h4>
           <div className="row">
             {
               restaurants.map((restaurant) => <RestaurantDBCard key={restaurant.restaurantId} restaurant={restaurant} />)
