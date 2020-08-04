@@ -11,6 +11,25 @@ On the user's profile, they will see their account information, friends, and a l
 
 Taste Buds eases the burden off users in trying to appease everyone's tastes when trying to decide on a group outing, while also giving users flexibility to be social when they want to be or have a fun outing by themselves.
 
+## Screenshots
+Home Page
+![homepage](https://raw.githubusercontent.com/djunaim/TasteBuds/master/assets/homepage.PNG)
+
+Profile
+![profile](https://raw.githubusercontent.com/djunaim/TasteBuds/master/assets/profile.PNG)
+
+Tasty Adventure
+![tasty form](https://raw.githubusercontent.com/djunaim/TasteBuds/master/assets/tastyForm.PNG)
+
+Single Restaurant View
+![single restaurant view](https://raw.githubusercontent.com/djunaim/TasteBuds/master/assets/restaurantView.PNG)
+
+My Tastes
+![my tastes](https://raw.githubusercontent.com/djunaim/TasteBuds/master/assets/myTastes.PNG)
+
+Friend's Tastes
+![friends taste](https://raw.githubusercontent.com/djunaim/TasteBuds/master/assets/friendsTastes.PNG)
+
 ## Technologies Used
 * HTML5
 * CSS/SCSS
